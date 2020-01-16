@@ -138,23 +138,23 @@
     <ClInclude Include="enemyManager.h">
       <Filter>mainGame\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="minion.h">
-      <Filter>mainGame\enemy</Filter>
-    </ClInclude>
     <ClInclude Include="objectPool.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="enemyBase.h">
       <Filter>mainGame\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="bulletBase.h">
-      <Filter>mainGame\bullet</Filter>
-    </ClInclude>
     <ClInclude Include="playerCommonBullet.h">
       <Filter>mainGame\bullet\playerBullet</Filter>
     </ClInclude>
     <ClInclude Include="playerHomingBullet.h">
       <Filter>mainGame\bullet\playerBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="bulletManager.h">
+      <Filter>mainGame\bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="redMinion.h">
+      <Filter>mainGame\enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +209,6 @@
     <ClCompile Include="enemyManager.cpp">
       <Filter>mainGame\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="minion.cpp">
-      <Filter>mainGame\enemy</Filter>
-    </ClCompile>
     <ClCompile Include="boss.cpp">
       <Filter>mainGame\enemy</Filter>
     </ClCompile>
@@ -221,14 +218,17 @@
     <ClCompile Include="enemyBase.cpp">
       <Filter>mainGame\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="bulletBase.cpp">
-      <Filter>mainGame\bullet</Filter>
-    </ClCompile>
     <ClCompile Include="playerCommonBullet.cpp">
       <Filter>mainGame\bullet\playerBullet</Filter>
     </ClCompile>
     <ClCompile Include="playerHomingBullet.cpp">
       <Filter>mainGame\bullet\playerBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="bulletManager.cpp">
+      <Filter>mainGame\bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="redMinion.cpp">
+      <Filter>mainGame\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

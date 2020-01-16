@@ -1,8 +1,34 @@
 #pragma once
-class enemyBase
+#include "gameNode.h"
+#define FRAMESPEED 10
+class enemyBase : public gameNode
 {
+protected:
+
+	image*	enemyImage;
+	RECT	enemyRect;
+
+	int		currentFrameX;
+	int		currentFrameY;
+	int		count;
+
 public:
 	enemyBase();
 	~enemyBase();
+
+	HRESULT init(const char * imageName, POINT position);
+	void release();
+	void update();
+	void render();
+
+	virtual void draw();
+	virtual void move();
+	virtual void leftAnimation();
+	virtual void rightAnimation();
+	virtual void idleAnimation();
+	
+	RECT getRect() { return enemyRect; }
+
+
 };
 

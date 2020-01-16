@@ -2,7 +2,7 @@
 #include "singletonBase.h"
 #define BULLETMAX 10000
 
-struct tagBullet
+struct bulletInfo
 {
 	image* bulletImage;
 	RECT rc;
@@ -18,11 +18,8 @@ struct tagBullet
 class objectPool : public singletonBase<objectPool>
 {
 private:
-	vector<tagBullet> vBulletRepository;
-	vector<tagBullet>::iterator viBulletRepository;
-	
-	vector<tagBullet> vUsedBullet;
-	vector<tagBullet>::iterator viUsedBullet;
+	vector<bulletInfo> _vBulletRepository;
+	vector<bulletInfo>::iterator _viBulletRepository;
 
 public:
 	objectPool();
@@ -30,11 +27,10 @@ public:
 
 	void init();
 
-	void setBulletVector(tagBullet vSpentBullet);
-	void reloadBullet();
+	void setBulletVector(bulletInfo vSpentBullet);
 
-	tagBullet getBullet();
-	vector<tagBullet>::iterator getBulletVectorIterator() { return viBulletRepository; }
+	bulletInfo getBullet();
+	vector<bulletInfo>::iterator getBulletVectorIterator() { return _viBulletRepository; }
 
 };
 

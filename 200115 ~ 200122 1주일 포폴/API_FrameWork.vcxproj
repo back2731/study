@@ -150,7 +150,7 @@
   <ItemGroup>
     <ClInclude Include="API_FrameWork.h" />
     <ClInclude Include="boss.h" />
-    <ClInclude Include="bulletBase.h" />
+    <ClInclude Include="bulletManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="enemyBase.h" />
     <ClInclude Include="enemyManager.h" />
@@ -161,7 +161,7 @@
     <ClInclude Include="introScene.h" />
     <ClInclude Include="keyManager.h" />
     <ClInclude Include="mainGame.h" />
-    <ClInclude Include="minion.h" />
+    <ClInclude Include="redMinion.h" />
     <ClInclude Include="objectPool.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playerCommonBullet.h" />
@@ -180,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="boss.cpp" />
-    <ClCompile Include="bulletBase.cpp" />
+    <ClCompile Include="bulletManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
@@ -190,7 +190,7 @@
     <ClCompile Include="introScene.cpp" />
     <ClCompile Include="keyManager.cpp" />
     <ClCompile Include="mainGame.cpp" />
-    <ClCompile Include="minion.cpp" />
+    <ClCompile Include="redMinion.cpp" />
     <ClCompile Include="objectPool.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerCommonBullet.cpp" />

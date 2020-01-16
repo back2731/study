@@ -15,33 +15,21 @@ void objectPool::init()
 {
 	for (int i = 0; i < BULLETMAX; i++)
 	{
-		tagBullet bullet;
-		vBulletRepository.push_back(bullet);
+		bulletInfo bullet;
+		_vBulletRepository.push_back(bullet);
 	}
 }
 
-void objectPool::setBulletVector(tagBullet vSpentBullet)
+
+void objectPool::setBulletVector(bulletInfo vSpentBullet)
 {
-	vUsedBullet.push_back(vSpentBullet);
+	_vBulletRepository.push_back(vSpentBullet);
 }
 
-void objectPool::reloadBullet()
+bulletInfo objectPool::getBullet()
 {
-	if (vUsedBullet.size() == BULLETMAX)
-	{
-		viUsedBullet = vUsedBullet.begin();
-		for (viUsedBullet; viUsedBullet != vUsedBullet.end(); ++viUsedBullet)
-		{
-			vBulletRepository.push_back(*viUsedBullet);
-		}
-		vUsedBullet.clear();
-	}
-}
-
-tagBullet objectPool::getBullet()
-{
-	tagBullet getBullet;
-	getBullet = vBulletRepository.back();
-	vBulletRepository.pop_back();
+	bulletInfo getBullet;
+	getBullet = _vBulletRepository.back();
+	_vBulletRepository.pop_back();
 	return getBullet;
 }
