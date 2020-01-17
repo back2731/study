@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include"stdafx.h"
 #include "image.h"
 #pragma comment(lib,"msimg32.lib")//알파블렌드를 사용하기 위해서 라이브러리 추가
 

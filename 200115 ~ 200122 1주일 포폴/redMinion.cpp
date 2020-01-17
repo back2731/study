@@ -27,7 +27,7 @@ void redMinion::release()
 
 void redMinion::update()
 {
-	//move(0);	
+	move(0);	
 	rectX = (enemyRect.left + (enemyRect.right - enemyRect.left) / 2);
 	rectY = (enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2);
 }

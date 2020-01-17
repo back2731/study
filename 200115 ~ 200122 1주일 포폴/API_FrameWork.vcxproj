@@ -23,8 +23,8 @@
     <ProjectGuid>{8FF13C43-33AC-4F4E-825D-B864A3A51362}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>APIFrameWork</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>one week portfolio</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="API_FrameWork.h" />
+    <ClInclude Include="blueMinion.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="bulletManager.h" />
     <ClInclude Include="commonMacroFunction.h" />
@@ -164,8 +165,6 @@
     <ClInclude Include="redMinion.h" />
     <ClInclude Include="objectPool.h" />
     <ClInclude Include="player.h" />
-    <ClInclude Include="playerCommonBullet.h" />
-    <ClInclude Include="playerHomingBullet.h" />
     <ClInclude Include="progressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
@@ -179,6 +178,7 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="blueMinion.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="bulletManager.cpp" />
     <ClCompile Include="enemyBase.cpp" />
@@ -193,8 +193,6 @@
     <ClCompile Include="redMinion.cpp" />
     <ClCompile Include="objectPool.cpp" />
     <ClCompile Include="player.cpp" />
-    <ClCompile Include="playerCommonBullet.cpp" />
-    <ClCompile Include="playerHomingBullet.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="timeManager.cpp" />

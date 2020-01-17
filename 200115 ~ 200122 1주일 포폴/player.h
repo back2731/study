@@ -1,19 +1,20 @@
 #pragma once
+#include "singletonBase.h"
 #include"gameNode.h"
-#include"bulletManager.h"
+#include "bulletManager.h"
+#include "enemyManager.h"
 
 #define FRAMESPEED 10
 #define PLAYERSPEED 5
 #define PUSHSHIFTSPEED 2
 
-class player : public gameNode
+class player : public gameNode, public singletonBase<player>
 {
 private:
 	image*	playerImage;
 	RECT	playerRect;
 	RECT	testRect;
 
-	bulletManager* playerBullet;
 
 	bool	isMove;
 	bool	isLeft;

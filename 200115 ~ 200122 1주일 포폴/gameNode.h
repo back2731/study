@@ -5,9 +5,8 @@ static image * _backBuffer = IMAGEMANAGER->addImage("backBuffer", WINSIZEX, WINS
 class gameNode
 {
 private:
-
-	
 	//void setBackBuffer();		//백버퍼 셋팅
+
 
 	HDC _hdc;
 	bool _managerInit;

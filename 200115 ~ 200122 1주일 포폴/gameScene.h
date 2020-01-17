@@ -2,13 +2,15 @@
 #include "gameNode.h"
 #include "player.h"
 #include "enemyManager.h"
+#include "bulletManager.h"
+
+#define PLAYER				player::getSingleton()
+#define ENEMYMANAGER		enemyManager::getSingleton()
+#define BULLETMANAGER		bulletManager::getSingleton()
 
 class gameScene : public gameNode
 {
 private:
-	player*			m_player;
-	enemyManager*	m_enemyManager;
-	bulletManager*	m_bulletManager;
 
 	float			loopX;
 	float			loopY;

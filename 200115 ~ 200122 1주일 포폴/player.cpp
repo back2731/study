@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "player.h"
 
-
 player::player()
 {
 }
@@ -20,7 +19,6 @@ HRESULT player::init()
 	isMove  = false;
 	isLeft  = false;
 
-	playerBullet = new bulletManager;
 
 	frameIndex = 0;
 	return S_OK;
@@ -28,7 +26,6 @@ HRESULT player::init()
 
 void player::release()
 {
-	SAFE_DELETE(playerBullet);
 }
 
 void player::update()
@@ -146,12 +143,14 @@ void player::update()
 	if (KEYMANAGER->isStayKeyDown('Z'))
 	{
 		count++;
-		if (count % 10 == 0)
+		if (count % 6 == 0)
 		{
-			playerBullet->playerCommonBulletfire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
+			BULLETMANAGER->playerCommonBulletfire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
 		}
 	}
-	playerBullet->playerCommonBulletMove();
+	BULLETMANAGER->playerCommonBulletRedMinionCollision();
+	BULLETMANAGER->playerCommonBulletBlueMinionCollision();
+	BULLETMANAGER->playerCommonBulletMove();
 
 	if (!isMove)		// 움직이지 않는 상태
 	{
@@ -211,7 +210,7 @@ void player::render()
 		Rectangle(getMemDC(), playerRect.left, playerRect.top, playerRect.right, playerRect.bottom);
 	}
 	IMAGEMANAGER->frameRender("레이무", getMemDC(), playerRect.left, playerRect.top);
-	playerBullet->playerCommonBulletRender();
+	BULLETMANAGER->playerCommonBulletRender();
 	wsprintf(str, "count :  %d", count);
 	TextOut(getMemDC(), 500, 0, str, strlen(str));
 

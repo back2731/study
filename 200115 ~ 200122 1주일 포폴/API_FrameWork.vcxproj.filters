@@ -61,11 +61,8 @@
     <Filter Include="mainGame\bullet">
       <UniqueIdentifier>{f88fe3f0-9182-4292-8e7b-511be55b72a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mainGame\bullet\playerBullet">
-      <UniqueIdentifier>{55ca98ab-ba22-46ae-8294-d4004762c5fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="mainGame\bullet\enemyBullet">
-      <UniqueIdentifier>{9eeb86cd-2c28-44d9-b51e-731ee389f6ff}</UniqueIdentifier>
+    <Filter Include="mainGame\enemy\minion">
+      <UniqueIdentifier>{b0e1d75f-ab16-41fd-b890-15400e21aa2e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,17 +141,14 @@
     <ClInclude Include="enemyBase.h">
       <Filter>mainGame\enemy</Filter>
     </ClInclude>
-    <ClInclude Include="playerCommonBullet.h">
-      <Filter>mainGame\bullet\playerBullet</Filter>
-    </ClInclude>
-    <ClInclude Include="playerHomingBullet.h">
-      <Filter>mainGame\bullet\playerBullet</Filter>
-    </ClInclude>
     <ClInclude Include="bulletManager.h">
       <Filter>mainGame\bullet</Filter>
     </ClInclude>
+    <ClInclude Include="blueMinion.h">
+      <Filter>mainGame\enemy\minion</Filter>
+    </ClInclude>
     <ClInclude Include="redMinion.h">
-      <Filter>mainGame\enemy</Filter>
+      <Filter>mainGame\enemy\minion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,17 +212,14 @@
     <ClCompile Include="enemyBase.cpp">
       <Filter>mainGame\enemy</Filter>
     </ClCompile>
-    <ClCompile Include="playerCommonBullet.cpp">
-      <Filter>mainGame\bullet\playerBullet</Filter>
-    </ClCompile>
-    <ClCompile Include="playerHomingBullet.cpp">
-      <Filter>mainGame\bullet\playerBullet</Filter>
-    </ClCompile>
     <ClCompile Include="bulletManager.cpp">
       <Filter>mainGame\bullet</Filter>
     </ClCompile>
+    <ClCompile Include="blueMinion.cpp">
+      <Filter>mainGame\enemy\minion</Filter>
+    </ClCompile>
     <ClCompile Include="redMinion.cpp">
-      <Filter>mainGame\enemy</Filter>
+      <Filter>mainGame\enemy\minion</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

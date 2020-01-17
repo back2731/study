@@ -6,9 +6,9 @@ class redMinion : public enemyBase
 private:
 
 	int count;
-	int addSpeed;
+
 	float rectX;
-	float rectY;
+	float rectY;	
 
 public:
 	redMinion();
@@ -27,5 +27,8 @@ public:
 
 	float getRedMinionX() { return rectX; }
 	float getRedMinionY() { return rectY; }
+
+	RECT getRect() { return enemyRect; }
+
 };
 

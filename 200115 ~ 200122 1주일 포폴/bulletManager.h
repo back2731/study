@@ -1,5 +1,8 @@
 #pragma once
+#include "singletonBase.h"
 #include "gameNode.h"
+#include "enemyManager.h"
+#include "player.h"	
 
 struct tagCannon
 {
@@ -8,21 +11,25 @@ struct tagCannon
 	int cannon;
 	float angle;
 };
-class bulletManager : gameNode
+
+class bulletManager : public gameNode, public singletonBase<bulletManager>
 {
 private:
 	vector<bulletInfo> vPlayerCommonBullet;
 	vector<bulletInfo>::iterator viPlayerCommonBullet;
+	bulletInfo playerCommonBullet;
 
 	vector<bulletInfo> vRedMinionBullet;
 	vector<bulletInfo>::iterator viRedMinionBullet;
-
-	bulletInfo playerCommonBullet;
-
 	bulletInfo redMinionBullet;
 	tagCannon redMinionCannon;
+	int redMinionBulletSpeed;
 
-	int bulletSpeed;
+	vector<bulletInfo> vBlueMinionBullet;
+	vector<bulletInfo>::iterator viBlueMinionBullet;
+	bulletInfo blueMinionBullet;
+	tagCannon blueMinionCannon;
+	int blueMinionBulletSpeed;	
 
 public:
 	bulletManager();
@@ -36,9 +43,15 @@ public:
 	void playerCommonBulletfire(float x, float y);
 	void playerCommonBulletMove();
 	void playerCommonBulletRender();
-
+	
 	void redMinionBulletfire(float x, float y);
 	void redMinionBulletMove();
-	void redMinionBulletRender();		 
+	void redMinionBulletRender();
+	void playerCommonBulletRedMinionCollision();
+
+	void blueMinionBulletfire(float x, float y);
+	void blueMinionBulletMove();
+	void blueMinionBulletRender();
+	void playerCommonBulletBlueMinionCollision();
 };
 

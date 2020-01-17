@@ -1,6 +1,6 @@
 #pragma once
-#include"singletonBase.h"
 #include"image.h"
+#include"singletonBase.h"
 class imageManager :public singletonBase<imageManager>
 {
 private:
