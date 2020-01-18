@@ -4,10 +4,12 @@
 class blueMinion : public enemyBase
 {
 private:
+
 	int count;
 
 	float rectX;
 	float rectY;
+
 public:
 	blueMinion();
 	~blueMinion();

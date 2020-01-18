@@ -15,6 +15,7 @@ private:
 	float			loopX;
 	float			loopY;
 
+
 public:
 	gameScene();
 	~gameScene();

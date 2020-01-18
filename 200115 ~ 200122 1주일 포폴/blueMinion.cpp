@@ -26,7 +26,7 @@ void blueMinion::release()
 
 void blueMinion::update()
 {
-	move(0);
+	//move(0);
 	rectX = (enemyRect.left + (enemyRect.right - enemyRect.left) / 2);
 	rectY = (enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2);
 }
@@ -58,7 +58,7 @@ void blueMinion::move(int pattern)
 
 			enemyRect.right -= 4;
 		}
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) < WINSIZEX / 2 - 300)
+		else if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) < WINSIZEX / 2 - 300)
 		{
 			idleAnimation();
 			enemyRect.left -= 4;

@@ -20,6 +20,12 @@ void objectPool::init()
 	}
 }
 
+void objectPool::render(HDC hdc)
+{
+	sprintf_s((str), "√—æÀ¿‹ø© : %d", _vBulletRepository.size());
+	TextOut(hdc, 100, 100, str, strlen(str));
+}
+
 
 void objectPool::setBulletVector(bulletInfo vSpentBullet)
 {

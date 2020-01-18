@@ -20,12 +20,14 @@ class objectPool : public singletonBase<objectPool>
 private:
 	vector<bulletInfo> _vBulletRepository;
 	vector<bulletInfo>::iterator _viBulletRepository;
+	char str[256];
 
 public:
 	objectPool();
 	~objectPool();
 
 	void init();
+	void render(HDC hdc);
 
 	void setBulletVector(bulletInfo vSpentBullet);
 

@@ -14,12 +14,10 @@ HRESULT player::init()
 {
 	playerImage = IMAGEMANAGER->addFrameImage("레이무", "images/reimu.bmp", 560, 300, 8, 3, true, RGB(255, 0, 255));
 	playerRect = RectMakeCenter(400, 650, playerImage->getFrameWidth(), playerImage->getFrameHeight());
-	//testRect = RectMake(85, 42, 635, 726);
-
+	
 	isMove  = false;
 	isLeft  = false;
-
-
+	
 	frameIndex = 0;
 	return S_OK;
 }
@@ -145,11 +143,10 @@ void player::update()
 		count++;
 		if (count % 6 == 0)
 		{
-			BULLETMANAGER->playerCommonBulletfire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
+			BULLETMANAGER->playerCommonBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
 		}
 	}
-	BULLETMANAGER->playerCommonBulletRedMinionCollision();
-	BULLETMANAGER->playerCommonBulletBlueMinionCollision();
+	BULLETMANAGER->playerBulletCollision();
 	BULLETMANAGER->playerCommonBulletMove();
 
 	if (!isMove)		// 움직이지 않는 상태
@@ -200,18 +197,33 @@ void player::update()
 			}
 		}
 	}
+
+	// 플레이어 히트박스 업데이트
+	playerHitRect = RectMakeCenter((playerRect.left + (playerRect.right - playerRect.left) / 2),
+		(playerRect.top + (playerRect.bottom - playerRect.top) / 2), 10, 10);
 }
 
 void player::render()
 {
+
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
 		//Rectangle(getMemDC(), testRect.left, testRect.top, testRect.right, testRect.bottom);
 		Rectangle(getMemDC(), playerRect.left, playerRect.top, playerRect.right, playerRect.bottom);
 	}
-	IMAGEMANAGER->frameRender("레이무", getMemDC(), playerRect.left, playerRect.top);
-	BULLETMANAGER->playerCommonBulletRender();
-	wsprintf(str, "count :  %d", count);
-	TextOut(getMemDC(), 500, 0, str, strlen(str));
 
+	IMAGEMANAGER->frameRender("레이무", getMemDC(), playerRect.left, playerRect.top);
+
+	if (KEYMANAGER->isToggleKey(VK_F2))
+	{
+		Rectangle(getMemDC(), playerHitRect.left, playerHitRect.top, playerHitRect.right, playerHitRect.bottom);
+	}
+
+	BULLETMANAGER->playerCommonBulletRender();
+
+	sprintf_s(str, "count :  %d", count);
+	TextOut(getMemDC(), 400, 50, str, strlen(str));
+	
+	sprintf_s(str, "총알 히트 :  %d", BULLETMANAGER->collisionCheck());
+	TextOut(getMemDC(), 400, 100, str, strlen(str));
 }

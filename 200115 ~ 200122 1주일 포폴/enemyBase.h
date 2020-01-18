@@ -28,7 +28,8 @@ public:
 	virtual void idleAnimation();
 	
 	RECT getRect() { return enemyRect; }
-
+	float getRectX() { return (enemyRect.left + (enemyRect.right - enemyRect.left) / 2); }
+	float getRectY() { return (enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2); }
 
 };
 

@@ -4,6 +4,14 @@
 #include "enemyManager.h"
 #include "player.h"	
 
+enum bulletCase
+{
+	MINION_REDBULLET,
+	MINION_BLUEBULLET, 
+	MINION_GREENBULLET, 
+	MINION_YELLOWBULLET
+};
+
 struct tagCannon
 {
 	POINT center;
@@ -31,6 +39,20 @@ private:
 	tagCannon blueMinionCannon;
 	int blueMinionBulletSpeed;	
 
+	vector<bulletInfo> vGreenMinionBullet;
+	vector<bulletInfo>::iterator viGreenMinionBullet;
+	bulletInfo greenMinionBullet;
+	tagCannon greenMinionCannon;
+	int greenMinionBulletSpeed;
+
+	vector<bulletInfo> vYellowMinionBullet;
+	vector<bulletInfo>::iterator viYellowMinionBullet;
+	bulletInfo yellowMinionBullet;
+	tagCannon yellowMinionCannon;
+	int yellowMinionBulletSpeed;
+
+	int collisionCheckNum;
+
 public:
 	bulletManager();
 	~bulletManager();
@@ -40,18 +62,34 @@ public:
 	void update();
 	void render();
 
-	void playerCommonBulletfire(float x, float y);
+	int collisionCheck() { return collisionCheckNum; }
+
+	void playerCommonBulletFire(float x, float y);
 	void playerCommonBulletMove();
 	void playerCommonBulletRender();
+	void playerBulletCollision();
 	
-	void redMinionBulletfire(float x, float y);
-	void redMinionBulletMove();
-	void redMinionBulletRender();
-	void playerCommonBulletRedMinionCollision();
+	void minionSpinBulletFire(int bulletKind, float x, float y);
+	void minionSpinBulletMove(int bulletKind);
+	void minionSpinBulletRender(int bulletKind);
 
-	void blueMinionBulletfire(float x, float y);
-	void blueMinionBulletMove();
-	void blueMinionBulletRender();
-	void playerCommonBulletBlueMinionCollision();
+	void minionCommonBulletFire(int bulletKind, float x, float y, float angle);
+	void minionCommonBulletMove(int bulletKind);
+	void minionCommonBulletRender(int bulletKind);
+
+	//void minionHomingBulletFire(int bulletKind, float x, float y);
+	//void minionHomingBulletMove(int bulletKind);
+	//void minionHomingBulletRender(int bulletKind);
+
+	void minionBulletCollision();
+	void redBulletPlayerCollision();
+	void blueBulletPlayerCollision();
+	void greenBulletPlayerCollision();
+	void yellowBulletPlayerCollision();
+
+	void playerCommonBulletRedMinionCollision();
+	void playerCommonBulletBlueMinionCollision();	
+	void playerCommonBulletGreenMinionCollision();
+	void playerCommonBulletYellowMinionCollision();
 };
 
