@@ -49,24 +49,23 @@ void yellowMinion::move(int pattern)
 	switch (pattern)
 	{
 	case 0:
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) < WINSIZEX / 2)
-		{
-			rightAnimation();
+	{	
+		rightAnimation();
 
-			enemyRect.left += 4;
+		enemyRect.left += 4;
 
-			enemyRect.right += 4;
-		}
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) >= WINSIZEX / 2)
-		{
-			idleAnimation();
-			enemyRect.left += 4;
-			enemyRect.right += 4;
-
-			enemyRect.top -= 2;
-			enemyRect.bottom -= 2;
-		}
+		enemyRect.right += 4; 
+	}
 		break;
+	case 1:
+	{
+		leftAnimation();
+
+		enemyRect.left -= 4;
+
+		enemyRect.right -= 4;
+	}
+	break;
 	default:
 		break;
 	}

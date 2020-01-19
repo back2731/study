@@ -145,9 +145,18 @@ void player::update()
 		{
 			BULLETMANAGER->playerCommonBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
 		}
+		if (count % 15 == 0)
+		{
+			BULLETMANAGER->playerHomingBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2 - 50, playerRect.top - 50);
+		}
+		if (count % 15 == 0)
+		{
+			BULLETMANAGER->playerHomingBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2 + 50, playerRect.top - 50);
+		}
 	}
 	BULLETMANAGER->playerBulletCollision();
 	BULLETMANAGER->playerCommonBulletMove();
+	BULLETMANAGER->playerHomingBulletMove();
 
 	if (!isMove)		// 움직이지 않는 상태
 	{
@@ -220,6 +229,7 @@ void player::render()
 	}
 
 	BULLETMANAGER->playerCommonBulletRender();
+	BULLETMANAGER->playerHomingBulletRender();
 
 	sprintf_s(str, "count :  %d", count);
 	TextOut(getMemDC(), 400, 50, str, strlen(str));

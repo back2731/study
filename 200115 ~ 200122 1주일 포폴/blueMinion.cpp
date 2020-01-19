@@ -49,25 +49,100 @@ void blueMinion::move(int pattern)
 {
 	switch (pattern)
 	{
-	case 0:
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) >= WINSIZEX / 2 - 300)
-		{
-			leftAnimation();
-
-			enemyRect.left -= 4;
-
-			enemyRect.right -= 4;
-		}
-		else if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) < WINSIZEX / 2 - 300)
+	case 0: // 직선 하강 후 우하단으로 사라지는 움직임
+		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) < WINSIZEY / 2)
 		{
 			idleAnimation();
+
+			enemyRect.top += 4;
+
+			enemyRect.bottom += 4;
+		}
+		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) >= WINSIZEY / 2)
+		{
+			rightAnimation();
+			enemyRect.left += 4;
+			enemyRect.right += 4;
+
+			enemyRect.top += 2;
+			enemyRect.bottom += 2;
+		}
+		break;
+	case 1: // 직선 하강 후 우하단으로 사라지는 움직임
+		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) < WINSIZEY / 2)
+		{
+			idleAnimation();
+
+			enemyRect.top += 4;
+
+			enemyRect.bottom += 4;
+		}
+		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) >= WINSIZEY / 2)
+		{
+			rightAnimation();
 			enemyRect.left -= 4;
 			enemyRect.right -= 4;
 
-			enemyRect.top -= 2;
-			enemyRect.bottom -= 2;
+			enemyRect.top += 2;
+			enemyRect.bottom += 2;
 		}
 		break;
+	case 2:
+	{	
+		count++;
+		if (count >= 0)
+		{
+			idleAnimation();
+
+			enemyRect.top += 2;
+			enemyRect.bottom += 2;
+		}
+		if (count >= 100 && count < 150)
+		{
+			enemyRect.left -= 2;
+			enemyRect.right -= 2;
+		}
+		if (count >= 150 && count < 275)
+		{
+			enemyRect.left += 2;
+			enemyRect.right += 2;
+		}
+		if (count >= 275 && count < 425)
+		{
+			enemyRect.left -= 2;
+			enemyRect.right -= 2;
+		}
+		if (count >= 425 && count < 575)
+		{
+			enemyRect.left += 2;
+			enemyRect.right += 2;
+		}
+		if (count >= 575 && count < 725)
+		{
+			enemyRect.left -= 2;
+			enemyRect.right -= 2;
+		}
+		if (count >= 725 && count < 875)
+		{
+			enemyRect.left += 2;
+			enemyRect.right += 2;
+		}
+		if (count >= 875 && count < 1025)
+		{
+			enemyRect.left -= 2;
+			enemyRect.right -= 2;
+		}
+		if (count >= 1025 && count < 1175)
+		{
+			enemyRect.left += 2;
+			enemyRect.right += 2;
+		}
+		if (count >= 1175 && count < 1325)
+		{
+			enemyRect.left -= 2;
+			enemyRect.right -= 2;
+		}
+	}
 	default:
 		break;
 	}

@@ -1,4 +1,5 @@
 #pragma once
+#include<math.h>
 
 #define PI			3.141592653
 #define PI2			PI*2
@@ -16,10 +17,15 @@
 #define ANGLE_150	PI / 6 * 5
 #define ANGLE_180	PI
 #define ANGLE_210	PI / 6 * 7
+#define ANGLE_225	PI / 4 * 5
 #define ANGLE_240	PI / 3 * 4
+#define ANGLE_255	PI / 12 * 17
 #define ANGLE_270	PI / 2 * 3
+#define ANGLE_285	PI / 12 * 19
 #define ANGLE_300	PI / 3 * 5
+#define ANGLE_315	PI / 4 * 7
 #define ANGLE_330	PI / 6 * 11
+#define ANGLE_345	PI / 12 * 23
 
 namespace UTIL
 {

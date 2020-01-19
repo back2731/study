@@ -42,11 +42,12 @@ private:
 	vYellowMinion	m_vYellowMinion;
 	viYellowMinion	m_viYellowMinion;
 	yellowMinion*	m_yellowMinion;
-
+	
 	float rectX;
 	float rectY;
 
 	int count;
+	char str[256];
 
 public:
 	enemyManager();

@@ -14,6 +14,7 @@ gameScene::~gameScene()
 HRESULT gameScene::init()
 {
 	IMAGEMANAGER->addImage("playerCommonBullet", "images/PlayerNormalBullet.bmp", 30, 64, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("playerHomingBullet", "images/playerHomingBullet.bmp", 13, 12, true, RGB(255, 0, 255));
 
 	// enemys
 	IMAGEMANAGER->addFrameImage("redMinion", "images/redMinion.bmp", 360, 60, 12, 2, true, RGB(255, 0, 255));
@@ -27,6 +28,9 @@ HRESULT gameScene::init()
 
 	IMAGEMANAGER->addFrameImage("yellowMinion", "images/yellowMinion.bmp", 360, 60, 12, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("yellowMinionBullet", "images/yellowMinionBullet.bmp", 16, 16, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("minionHomingRedBullet", "images/minionHomingRedBullet.bmp", 27, 31, true, RGB(255, 0, 0));
+	IMAGEMANAGER->addImage("minionHomingBlueBullet", "images/minionHomingBlueBullet.bmp", 27, 31, true, RGB(0, 0, 255));
 	//
 
 	IMAGEMANAGER->addImage("UIConsole", "images/UIConsole.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
@@ -49,7 +53,7 @@ void gameScene::update()
 	PLAYER->update();
 	ENEMYMANAGER->update();
 
-	loopY -= 2;	
+	loopY -= 5;	
 	
 	if (KEYMANAGER->isOnceKeyDown('1'))
 	{

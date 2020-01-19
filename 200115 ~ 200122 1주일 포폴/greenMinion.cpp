@@ -25,7 +25,6 @@ void greenMinion::release()
 
 void greenMinion::update()
 {	
-	//move(0);	
 	rectX = (enemyRect.left + (enemyRect.right - enemyRect.left) / 2);
 	rectY = (enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2);
 }
@@ -46,25 +45,31 @@ void greenMinion::draw()
 
 void greenMinion::move(int pattern)
 {
+
 	switch (pattern)
 	{
-	case 0:
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) < WINSIZEX / 2)
-		{
-			rightAnimation();
-
-			enemyRect.left += 4;
-
-			enemyRect.right += 4;
-		}
-		if ((enemyRect.left + (enemyRect.right - enemyRect.left) / 2) >= WINSIZEX / 2)
+	case 0:	
+		count++;
+		if (count >= 0 && count < 100)
 		{
 			idleAnimation();
-			enemyRect.left += 4;
-			enemyRect.right += 4;
 
-			enemyRect.top -= 2;
-			enemyRect.bottom -= 2;
+			enemyRect.top += 4;
+
+			enemyRect.bottom += 4;
+		}
+		else if (count >= 100 && count < 500)
+		{
+			idleAnimation();
+			enemyRect.top += 2;
+			enemyRect.bottom += 2;
+		}
+		else
+		{
+			idleAnimation();
+
+			enemyRect.top -= 6;
+			enemyRect.bottom -= 6;
 		}
 		break;
 	default:
