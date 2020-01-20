@@ -4,8 +4,8 @@
 #include "enemyManager.h"
 #include "player.h"	
 
-#define PLAYERHIT	50
-#define ENEMYHIT	30
+#define PLAYERHIT	30
+#define ENEMYHIT	80
 
 enum bulletCase
 {
@@ -105,6 +105,43 @@ private:
 	tagCannon spinYellowCannon;
 	int spinYellowBulletSpeed;
 
+	// 보스 총알
+	// 보스 버티컬 불릿
+	vector<bulletInfo> vBossVerticalBullet;
+	vector<bulletInfo>::iterator viBossVerticalBullet;
+	bulletInfo bossVerticalBullet;
+	tagCannon bossVerticalCannon;
+	int bossVerticalBulletSpeed;
+
+	// 보스 호리젠탈 불릿
+	vector<bulletInfo> vBossHorizontalBullet;
+	vector<bulletInfo>::iterator viBossHorizontalBullet;
+	bulletInfo bossHorizontalBullet;
+	tagCannon bossHorizontalCannon;
+	int bossHorizontalBulletSpeed;
+
+	// 보스 라이트 스핀 불릿
+	vector<bulletInfo> vBossRightSpinBullet;
+	vector<bulletInfo>::iterator viBossRightSpinBullet;
+	bulletInfo bossRightSpinBullet;
+	tagCannon bossRightSpinCannon;
+	int bossRightSpinBulletSpeed;
+
+	// 보스 레프트 스핀 불릿
+	vector<bulletInfo> vBossLeftSpinBullet;
+	vector<bulletInfo>::iterator viBossLeftSpinBullet;
+	bulletInfo bossLeftSpinBullet;
+	tagCannon bossLeftSpinCannon;
+	int bossLeftSpinBulletSpeed;
+
+	// 보스 커먼 불릿
+	vector<bulletInfo> vBossCommonBullet;
+	vector<bulletInfo>::iterator viBossCommonBullet;
+	bulletInfo bossCommonBullet;
+	tagCannon bossCommonCannon;
+	int bossCommonBulletSpeed;
+
+
 	int collisionCheckNum;
 
 public:
@@ -134,33 +171,57 @@ public:
 	void playerCommonBulletBlueMinionCollision();
 	void playerCommonBulletGreenMinionCollision();
 	void playerCommonBulletYellowMinionCollision();
+	void playerCommonBulletBossCollision();
 	void playerHomingBulletRedMinionCollision();
 	void playerHomingBulletBlueMinionCollision();
 	void playerHomingBulletGreenMinionCollision();
 	void playerHomingBulletYellowMinionCollision();
+	void playerHomingBulletBossCollision();
 
 
 	// 미니언 통상 총알
-	void minionCommonBulletFire(int bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
-	void minionCommonBulletMove(int bulletKind);
-	void minionCommonBulletRender(int bulletKind);
+	void minionCommonBulletFire(int bulletNum, string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
+	void minionCommonBulletMove(int bulletNum);
+	void minionCommonBulletRender(int bulletNum);
 
 	// 미니언 회전 총알
-	void minionSpinBulletFire(int bulletKind, float x, float y, int interval);
-	void minionSpinBulletMove(int bulletKind);
-	void minionSpinBulletRender(int bulletKind);
+	void minionSpinBulletFire(int bulletNum, string bulletKind, float x, float y, int interval);
+	void minionSpinBulletMove(int bulletNum);
+	void minionSpinBulletRender(int bulletNum);
 
 	// 미니언 유도 총알
-	void minionHomingBulletFire(int bulletKind, float x, float y, float playerX, float playerY, float bulletSpeed, int interval);
-	void minionHomingBulletMove(int bulletKind);
-	void minionHomingBulletRender(int bulletKind);
+	void minionHomingBulletFire(int bulletNum, string bulletKind, float x, float y, float playerX, float playerY, float bulletSpeed, int interval);
+	void minionHomingBulletMove(int bulletNum);
+	void minionHomingBulletRender(int bulletNum);
 
 	// 미니언 총알 충돌(미니언 -> 플레이어)
-	void minionBulletCollision();
+	void enemyBulletCollision();
 	void redBulletPlayerCollision();
 	void blueBulletPlayerCollision();
 	void greenBulletPlayerCollision();
 	void yellowBulletPlayerCollision();
+	void bossBulletPlayerCollision();
+
+	// 보스
+	void bossVerticalBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
+	void bossVerticalBulletMove();
+	void bossVerticalBulletRender();
+
+	void bossHorizontalBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
+	void bossHorizontalBulletMove();
+	void bossHorizontalBulletRender();
+
+	void bossRightSpinBulletFire(string bulletKind, float x, float y, int interval);
+	void bossRightSpinBulletMove();
+	void bossRightSpinBulletRender();
+
+	void bossLeftSpinBulletFire(string bulletKind, float x, float y, int interval);
+	void bossLeftSpinBulletMove();
+	void bossLeftSpinBulletRender();
+
+	void bossCommonBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
+	void bossCommonBulletMove();
+	void bossCommonBulletRender();
 
 };
 

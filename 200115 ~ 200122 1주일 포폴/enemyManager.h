@@ -9,6 +9,8 @@
 #include "greenMinion.h"
 #include "yellowMinion.h"
 
+#include "boss.h"
+
 class enemyManager : public gameNode, public singletonBase<enemyManager>
 {
 private:
@@ -24,6 +26,9 @@ private:
 
 	typedef vector<yellowMinion*> vYellowMinion;
 	typedef vector<yellowMinion*>::iterator viYellowMinion;
+
+	typedef vector<boss*> vBoss;
+	typedef vector<boss*>::iterator viBoss;
 
 private:
 
@@ -42,12 +47,25 @@ private:
 	vYellowMinion	m_vYellowMinion;
 	viYellowMinion	m_viYellowMinion;
 	yellowMinion*	m_yellowMinion;
-	
+
+	vBoss			m_vBoss;
+	viBoss			m_viBoss;
+	boss*			m_Boss;
+
+	image*			bossCannonImage;
+	RECT			bossCannon;
+	int				frameCount;
+	int				currentFrameX;
+	int				currentFrameY;
+	int				alphaValue;
+
 	float rectX;
 	float rectY;
 
 	int count;
 	char str[256];
+
+	bool change;
 
 public:
 	enemyManager();
@@ -57,6 +75,8 @@ public:
 	void release();
 	void update();
 	void render();
+
+	bool mapChange();
 
 	void redMinionUpdate(int pattern);
 	void redMinionRender(int pattern);
@@ -89,5 +109,14 @@ public:
 	void deleteYellowEnemy(int num);
 	vYellowMinion getVYellowMinion() { return m_vYellowMinion; }
 	viYellowMinion getViYellowMinion() { return m_viYellowMinion; }
+
+	void bossUpdate(int pattern);
+	void bossRender(int pattern);
+	void setBoss();
+	void bossBulletFire(int pattern);
+	void deleteBoss(int num);
+	vBoss getVBoss() { return m_vBoss; }
+	viBoss getViBoss() { return m_viBoss; }
+
 };
 

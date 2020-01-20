@@ -14,7 +14,12 @@ private:
 
 	float			loopX;
 	float			loopY;
+	int				addSpeed;
 
+	char str[256];
+	bool change;
+	int stageBG;
+	int bossBG;
 
 public:
 	gameScene();

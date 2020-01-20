@@ -53,6 +53,8 @@ void redMinion::move(int pattern)
 	{
 	case 0:	// 직선 하강 후 우하단으로 사라지는 움직임
 	{
+		count++;
+
 		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) < WINSIZEY / 2)
 		{
 			idleAnimation();
@@ -64,6 +66,7 @@ void redMinion::move(int pattern)
 		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) >= WINSIZEY / 2)
 		{
 			rightAnimation();
+
 			enemyRect.left += 4;
 			enemyRect.right += 4;
 
@@ -74,13 +77,39 @@ void redMinion::move(int pattern)
 		break;
 	case 1:
 	{
-		leftAnimation();
+		count++;
+		if (count >= 1)
+		{
+			rightAnimation();
 
-		enemyRect.left -= 5;
-
-		enemyRect.right -= 5;
+			enemyRect.left += 4;
+			enemyRect.right += 4;
+		}
 	}
 		break;
+	case 2:
+	{			
+		idleAnimation();
+
+		count++;
+		if (count >= 0)
+		{
+			enemyRect.top += 5;
+			enemyRect.bottom += 5;
+		}
+		if (count >= 0 && count < 300)
+		{
+			enemyRect.left += 7;
+			enemyRect.right += 7;
+		}
+		if (count >= 50 && count < 300)
+		{
+			addSpeed += 1;
+			enemyRect.left -= addSpeed / 5;
+			enemyRect.right -= addSpeed / 5;
+		}
+	}
+	break;
 	default:
 		break;
 	}
@@ -89,9 +118,9 @@ void redMinion::move(int pattern)
 
 void redMinion::leftAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -104,9 +133,9 @@ void redMinion::leftAnimation()
 
 void redMinion::rightAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 1;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -119,9 +148,9 @@ void redMinion::rightAnimation()
 
 void redMinion::idleAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX()- 6)

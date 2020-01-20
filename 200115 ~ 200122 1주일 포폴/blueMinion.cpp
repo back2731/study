@@ -79,7 +79,7 @@ void blueMinion::move(int pattern)
 		}
 		if ((enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2) >= WINSIZEY / 2)
 		{
-			rightAnimation();
+			leftAnimation();
 			enemyRect.left -= 4;
 			enemyRect.right -= 4;
 
@@ -88,59 +88,26 @@ void blueMinion::move(int pattern)
 		}
 		break;
 	case 2:
-	{	
+	{				
+		
+		idleAnimation();
+
 		count++;
 		if (count >= 0)
 		{
-			idleAnimation();
-
-			enemyRect.top += 2;
-			enemyRect.bottom += 2;
+			enemyRect.top += 5;
+			enemyRect.bottom += 5;
 		}
-		if (count >= 100 && count < 150)
+		if (count >= 0 && count < 300)
 		{
-			enemyRect.left -= 2;
-			enemyRect.right -= 2;
+			enemyRect.left -= 7;
+			enemyRect.right -= 7;
 		}
-		if (count >= 150 && count < 275)
+		if (count >= 50 && count < 300)
 		{
-			enemyRect.left += 2;
-			enemyRect.right += 2;
-		}
-		if (count >= 275 && count < 425)
-		{
-			enemyRect.left -= 2;
-			enemyRect.right -= 2;
-		}
-		if (count >= 425 && count < 575)
-		{
-			enemyRect.left += 2;
-			enemyRect.right += 2;
-		}
-		if (count >= 575 && count < 725)
-		{
-			enemyRect.left -= 2;
-			enemyRect.right -= 2;
-		}
-		if (count >= 725 && count < 875)
-		{
-			enemyRect.left += 2;
-			enemyRect.right += 2;
-		}
-		if (count >= 875 && count < 1025)
-		{
-			enemyRect.left -= 2;
-			enemyRect.right -= 2;
-		}
-		if (count >= 1025 && count < 1175)
-		{
-			enemyRect.left += 2;
-			enemyRect.right += 2;
-		}
-		if (count >= 1175 && count < 1325)
-		{
-			enemyRect.left -= 2;
-			enemyRect.right -= 2;
+			addSpeed += 1;
+			enemyRect.left += addSpeed / 5;
+			enemyRect.right += addSpeed / 5;
 		}
 	}
 	default:
@@ -150,9 +117,9 @@ void blueMinion::move(int pattern)
 
 void blueMinion::leftAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -166,9 +133,9 @@ void blueMinion::leftAnimation()
 
 void blueMinion::rightAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 1;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -181,9 +148,9 @@ void blueMinion::rightAnimation()
 
 void blueMinion::idleAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX() - 6)

@@ -48,28 +48,51 @@ void greenMinion::move(int pattern)
 
 	switch (pattern)
 	{
+		addSpeed = 0;
 	case 0:	
 		count++;
+		idleAnimation();
 		if (count >= 0 && count < 100)
 		{
-			idleAnimation();
 
 			enemyRect.top += 4;
-
 			enemyRect.bottom += 4;
 		}
-		else if (count >= 100 && count < 500)
+		if (count >= 100 && count < 150)
 		{
-			idleAnimation();
+
 			enemyRect.top += 2;
 			enemyRect.bottom += 2;
 		}
-		else
+		if (count >=  250)
 		{
-			idleAnimation();
+			addSpeed++;
+			enemyRect.top -= addSpeed / 2;
+			enemyRect.bottom -= addSpeed / 2;
 
-			enemyRect.top -= 6;
-			enemyRect.bottom -= 6;
+		}
+		break;
+	case 1:
+		count++;
+		addSpeed++;
+
+		if (count >= 0)
+		{
+			rightAnimation();
+			enemyRect.left += addSpeed / 5;
+
+			enemyRect.right += addSpeed / 5;
+		}
+		break;
+	case 2:
+		count++;
+		addSpeed++;
+		if (count >= 0)
+		{
+			rightAnimation();
+			enemyRect.left += addSpeed / 10;
+
+			enemyRect.right += addSpeed / 10;
 		}
 		break;
 	default:
@@ -79,9 +102,9 @@ void greenMinion::move(int pattern)
 
 void greenMinion::leftAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -94,9 +117,9 @@ void greenMinion::leftAnimation()
 
 void greenMinion::rightAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 1;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -109,9 +132,9 @@ void greenMinion::rightAnimation()
 
 void greenMinion::idleAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX() - 6)

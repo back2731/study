@@ -24,6 +24,7 @@ private:
 	int count;
 	char str[256];
 
+
 public:
 	player();
 	~player();
@@ -33,8 +34,9 @@ public:
 	void update();
 	void render();
 
-	RECT getPlayerRect() { return playerRect; }
-	int getPlayerRectX() { return (playerRect.left + (playerRect.right - playerRect.left) / 2); }
-	int getPlayerRectY() { return (playerRect.top + (playerRect.bottom - playerRect.top) / 2); }
+	RECT getPlayerRect() { return playerHitRect; }
+	int getPlayerRectX() { return (playerHitRect.left + (playerHitRect.right - playerHitRect.left) / 2); }
+	int getPlayerRectY() { return (playerHitRect.top + (playerHitRect.bottom - playerHitRect.top) / 2); }
+
 };
 

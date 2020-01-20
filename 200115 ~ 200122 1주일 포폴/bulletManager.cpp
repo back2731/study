@@ -108,7 +108,60 @@ void bulletManager::playerHomingBulletFire(float playerBulletX, float playerBull
 
 void bulletManager::playerHomingBulletMove()
 {
-	if (ENEMYMANAGER->getVRedMinion().size() > 0)
+	if (ENEMYMANAGER->getVBoss().size() > 0)
+	{
+		if (ENEMYMANAGER->getVBoss()[0]->getBossX() >= 0 && ENEMYMANAGER->getVBoss()[0]->getBossX() <= WINSIZEX &&
+			ENEMYMANAGER->getVBoss()[0]->getBossY() >= 0 && ENEMYMANAGER->getVBoss()[0]->getBossY() <= WINSIZEX)
+		{
+			for (viPlayerHomingBullet = vPlayerHomingBullet.begin(); viPlayerHomingBullet != vPlayerHomingBullet.end();)
+			{
+				float distance;
+				distance = getDistance(viPlayerHomingBullet->x, viPlayerHomingBullet->y,
+					ENEMYMANAGER->getVBoss()[0]->getBossX(), ENEMYMANAGER->getVBoss()[0]->getBossY());
+				float vx, vy;
+				if (distance)
+				{
+					vx = ((ENEMYMANAGER->getVBoss()[0]->getBossX()) - viPlayerHomingBullet->x) / distance * viPlayerHomingBullet->speed;
+					vy = ((ENEMYMANAGER->getVBoss()[0]->getBossY()) - viPlayerHomingBullet->y) / distance * viPlayerHomingBullet->speed;
+				}
+				else
+				{
+					vx = 0;
+					vy = playerHomingBullet.speed;
+				}
+				viPlayerHomingBullet->x += vx;
+				viPlayerHomingBullet->y += vy;
+				viPlayerHomingBullet->rc = RectMakeCenter(viPlayerHomingBullet->x, viPlayerHomingBullet->y,
+					viPlayerHomingBullet->bulletImage->getWidth(), viPlayerHomingBullet->bulletImage->getHeight());
+
+				if (0 >= viPlayerHomingBullet->rc.bottom)
+				{
+					playerHomingBullet = { 0, };
+					OBJECTPOOL->setBulletVector(playerHomingBullet);
+					viPlayerHomingBullet = vPlayerHomingBullet.erase(viPlayerHomingBullet);
+				}
+				else ++viPlayerHomingBullet;
+			}
+		}
+		else
+		{
+			for (viPlayerHomingBullet = vPlayerHomingBullet.begin(); viPlayerHomingBullet != vPlayerHomingBullet.end();)
+			{
+				viPlayerHomingBullet->y -= viPlayerHomingBullet->speed;
+				viPlayerHomingBullet->rc = RectMakeCenter(viPlayerHomingBullet->x, viPlayerHomingBullet->y,
+					viPlayerHomingBullet->bulletImage->getWidth(), viPlayerHomingBullet->bulletImage->getHeight());
+
+				if (0 >= viPlayerHomingBullet->rc.bottom)
+				{
+					playerHomingBullet = { 0, };
+					OBJECTPOOL->setBulletVector(playerHomingBullet);
+					viPlayerHomingBullet = vPlayerHomingBullet.erase(viPlayerHomingBullet);
+				}
+				else ++viPlayerHomingBullet;
+			}
+		}
+	}
+	else if (ENEMYMANAGER->getVRedMinion().size() > 0)
 	{
 		if (ENEMYMANAGER->getVRedMinion()[0]->getRedMinionX() >= 0 && ENEMYMANAGER->getVRedMinion()[0]->getRedMinionX() <= WINSIZEX &&
 			ENEMYMANAGER->getVRedMinion()[0]->getRedMinionY() >= 0 && ENEMYMANAGER->getVRedMinion()[0]->getRedMinionX() <= WINSIZEX)
@@ -360,10 +413,12 @@ void bulletManager::playerBulletCollision()
 	playerCommonBulletBlueMinionCollision();
 	playerCommonBulletGreenMinionCollision();
 	playerCommonBulletYellowMinionCollision();
+	playerCommonBulletBossCollision();
 	playerHomingBulletRedMinionCollision();
 	playerHomingBulletBlueMinionCollision();
 	playerHomingBulletGreenMinionCollision();
 	playerHomingBulletYellowMinionCollision();
+	playerHomingBulletBossCollision();
 }
 
 void bulletManager::playerCommonBulletRedMinionCollision()
@@ -451,6 +506,29 @@ void bulletManager::playerCommonBulletYellowMinionCollision()
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
 					ENEMYMANAGER->deleteYellowEnemy(j);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void bulletManager::playerCommonBulletBossCollision()
+{
+	for (int i = 0; i < vPlayerCommonBullet.size(); i++)
+	{
+		for (int j = 0; j < ENEMYMANAGER->getVBoss().size(); j++)
+		{
+			RECT rc;
+			if (getDistance(vPlayerCommonBullet[i].x, vPlayerCommonBullet[i].y,
+				ENEMYMANAGER->getVBoss()[j]->getBossX(), ENEMYMANAGER->getVBoss()[j]->getBossY()) <= ENEMYHIT)
+			{
+				if (IntersectRect(&rc, &vPlayerCommonBullet[i].rc, &ENEMYMANAGER->getVBoss()[j]->getRect()))
+				{
+					playerCommonBullet = { 0, };
+					OBJECTPOOL->setBulletVector(playerCommonBullet);
+					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
+					//ENEMYMANAGER->deleteYellowEnemy(j);
 					break;
 				}
 			}
@@ -550,9 +628,32 @@ void bulletManager::playerHomingBulletYellowMinionCollision()
 	}
 }
 
-void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, float angle, float bulletSpeed, int interval)
+void bulletManager::playerHomingBulletBossCollision()
 {
-	switch (bulletKind)
+	for (int i = 0; i < vPlayerHomingBullet.size(); i++)
+	{
+		for (int j = 0; j < ENEMYMANAGER->getVBoss().size(); j++)
+		{
+			RECT rc;
+			if (getDistance(vPlayerHomingBullet[i].x, vPlayerHomingBullet[i].y,
+				ENEMYMANAGER->getVBoss()[j]->getBossX(), ENEMYMANAGER->getVBoss()[j]->getBossY()) <= ENEMYHIT)
+			{
+				if (IntersectRect(&rc, &vPlayerHomingBullet[i].rc, &ENEMYMANAGER->getVBoss()[j]->getRect()))
+				{
+					playerHomingBullet = { 0, };
+					OBJECTPOOL->setBulletVector(playerHomingBullet);
+					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
+					//ENEMYMANAGER->deleteBoss(j);
+					break;
+				}
+			}
+		}
+	}
+}
+
+void bulletManager::minionCommonBulletFire(int bulletNum, string bulletKind, float x, float y, float angle, float bulletSpeed, int interval)
+{
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -561,7 +662,7 @@ void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, flo
 		commonRedCannon.center.y = y;
 		commonRedCannon.angle = angle;
 
-		commonRedBullet.bulletImage = IMAGEMANAGER->findImage("redMinionBullet");
+		commonRedBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		commonRedBullet.speed = bulletSpeed;
 		commonRedBullet.angle = commonRedCannon.angle;
 
@@ -589,7 +690,7 @@ void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, flo
 		commonBlueCannon.center.y = y;
 		commonBlueCannon.angle = angle;
 
-		commonBlueBullet.bulletImage = IMAGEMANAGER->findImage("blueMinionBullet");
+		commonBlueBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		commonBlueBullet.speed = bulletSpeed;
 		commonBlueBullet.angle = commonBlueCannon.angle;
 
@@ -618,7 +719,7 @@ void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, flo
 		commonGreenCannon.center.y = y;
 		commonGreenCannon.angle = angle;
 
-		commonGreenBullet.bulletImage = IMAGEMANAGER->findImage("greenMinionBullet");
+		commonGreenBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		commonGreenBullet.speed = bulletSpeed;
 		commonGreenBullet.angle = commonGreenCannon.angle;
 
@@ -647,7 +748,7 @@ void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, flo
 		commonYellowCannon.center.y = y;
 		commonYellowCannon.angle = angle;
 
-		commonYellowBullet.bulletImage = IMAGEMANAGER->findImage("yellowMinionBullet");
+		commonYellowBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		commonYellowBullet.speed = bulletSpeed;
 		commonYellowBullet.angle = commonYellowCannon.angle;
 
@@ -673,9 +774,9 @@ void bulletManager::minionCommonBulletFire(int bulletKind, float x, float y, flo
 	}
 }
 
-void bulletManager::minionCommonBulletMove(int bulletKind)
+void bulletManager::minionCommonBulletMove(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -786,9 +887,9 @@ void bulletManager::minionCommonBulletMove(int bulletKind)
 	}
 }
 
-void bulletManager::minionCommonBulletRender(int bulletKind)
+void bulletManager::minionCommonBulletRender(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:
 	{
@@ -847,9 +948,9 @@ void bulletManager::minionCommonBulletRender(int bulletKind)
 	}
 }
 
-void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int interval)
+void bulletManager::minionSpinBulletFire(int bulletNum, string bulletKind, float x, float y, int interval)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -858,7 +959,7 @@ void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int i
 		spinRedCannon.center.y = y;
 		spinRedCannon.cannon = 100;
 
-		spinRedBullet.bulletImage = IMAGEMANAGER->findImage("redMinionBullet");
+		spinRedBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		spinRedBullet.speed = 5.0f;
 		spinRedBullet.angle = spinRedCannon.angle;
 
@@ -887,7 +988,7 @@ void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int i
 		spinBlueCannon.center.y = y;
 		spinBlueCannon.cannon = 100;
 
-		spinBlueBullet.bulletImage = IMAGEMANAGER->findImage("blueMinionBullet");
+		spinBlueBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		spinBlueBullet.speed = 5.0f;
 		spinBlueBullet.angle = spinBlueCannon.angle;
 
@@ -917,7 +1018,7 @@ void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int i
 		spinGreenCannon.center.y = y;
 		spinGreenCannon.cannon = 100;
 
-		spinGreenBullet.bulletImage = IMAGEMANAGER->findImage("greenMinionBullet");
+		spinGreenBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		spinGreenBullet.speed = 5.0f;
 		spinGreenBullet.angle = spinGreenCannon.angle;
 
@@ -947,7 +1048,7 @@ void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int i
 		spinYellowCannon.center.y = y;
 		spinYellowCannon.cannon = 100;
 
-		spinYellowBullet.bulletImage = IMAGEMANAGER->findImage("yellowMinionBullet");
+		spinYellowBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		spinYellowBullet.speed = 5.0f;
 		spinYellowBullet.angle = spinYellowCannon.angle;
 
@@ -974,9 +1075,9 @@ void bulletManager::minionSpinBulletFire(int bulletKind, float x, float y, int i
 	}
 }
 
-void bulletManager::minionSpinBulletMove(int bulletKind)
+void bulletManager::minionSpinBulletMove(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -1022,8 +1123,8 @@ void bulletManager::minionSpinBulletMove(int bulletKind)
 		viSpinBlueBullet = vSpinBlueBullet.begin();
 		for (viSpinBlueBullet; viSpinBlueBullet != vSpinBlueBullet.end();)
 		{
-			viSpinBlueBullet->x += cosf(viSpinBlueBullet->angle) * viSpinBlueBullet->speed;
-			viSpinBlueBullet->y += -sinf(viSpinBlueBullet->angle) * viSpinBlueBullet->speed;
+			viSpinBlueBullet->x -= cosf(viSpinBlueBullet->angle) * viSpinBlueBullet->speed;
+			viSpinBlueBullet->y -= -sinf(viSpinBlueBullet->angle) * viSpinBlueBullet->speed;
 
 			viSpinBlueBullet->rc = RectMakeCenter(viSpinBlueBullet->x,
 				viSpinBlueBullet->y, viSpinBlueBullet->bulletImage->getWidth(),
@@ -1108,9 +1209,9 @@ void bulletManager::minionSpinBulletMove(int bulletKind)
 	}	
 }
 
-void bulletManager::minionSpinBulletRender(int bulletKind)
+void bulletManager::minionSpinBulletRender(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -1169,9 +1270,9 @@ void bulletManager::minionSpinBulletRender(int bulletKind)
 	}	
 }
 
-void bulletManager::minionHomingBulletFire(int bulletKind, float x, float y, float playerX, float playerY, float bulletSpeed, int interval)
+void bulletManager::minionHomingBulletFire(int bulletNum, string bulletKind, float x, float y, float playerX, float playerY, float bulletSpeed, int interval)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -1180,7 +1281,7 @@ void bulletManager::minionHomingBulletFire(int bulletKind, float x, float y, flo
 		homingRedCannon.center.y = y;
 		homingRedCannon.angle = getAngle(homingRedCannon.center.x, homingRedCannon.center.y, playerX, playerY);
 
-		homingRedBullet.bulletImage = IMAGEMANAGER->findImage("minionHomingRedBullet");
+		homingRedBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		homingRedBullet.speed = bulletSpeed;
 		homingRedBullet.angle = homingRedCannon.angle;
 
@@ -1208,7 +1309,7 @@ void bulletManager::minionHomingBulletFire(int bulletKind, float x, float y, flo
 		homingBlueCannon.center.y = y;
 		homingBlueCannon.angle = getAngle(homingBlueCannon.center.x, homingBlueCannon.center.y, playerX, playerY);
 
-		homingBlueBullet.bulletImage = IMAGEMANAGER->findImage("minionHomingBlueBullet");
+		homingBlueBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
 		homingBlueBullet.speed = bulletSpeed;
 		homingBlueBullet.angle = homingBlueCannon.angle;
 
@@ -1234,9 +1335,9 @@ void bulletManager::minionHomingBulletFire(int bulletKind, float x, float y, flo
 	}
 }
 
-void bulletManager::minionHomingBulletMove(int bulletKind)
+void bulletManager::minionHomingBulletMove(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		
 	{
@@ -1295,9 +1396,9 @@ void bulletManager::minionHomingBulletMove(int bulletKind)
 	}
 }
 
-void bulletManager::minionHomingBulletRender(int bulletKind)
+void bulletManager::minionHomingBulletRender(int bulletNum)
 {
-	switch (bulletKind)
+	switch (bulletNum)
 	{
 	case MINION_REDBULLET:		// 레드 미니언 상모돌리기 탄
 	{
@@ -1330,12 +1431,13 @@ void bulletManager::minionHomingBulletRender(int bulletKind)
 	}
 }
 
-void bulletManager::minionBulletCollision()
+void bulletManager::enemyBulletCollision()
 {
 	redBulletPlayerCollision();
 	blueBulletPlayerCollision();
 	greenBulletPlayerCollision();
 	yellowBulletPlayerCollision();
+	bossBulletPlayerCollision();
 }
 
 void bulletManager::redBulletPlayerCollision()
@@ -1523,3 +1625,443 @@ void bulletManager::yellowBulletPlayerCollision()
 		}
 	}
 }
+
+void bulletManager::bossBulletPlayerCollision()
+{
+	for (int i = 0; i < vBossVerticalBullet.size(); i++)	// 버티컬
+	{
+		RECT rc;
+		if (getDistance(vBossVerticalBullet[i].x, vBossVerticalBullet[i].y,
+			PLAYER->getPlayerRectX(), PLAYER->getPlayerRectY()) <= PLAYERHIT)
+		{
+			if (IntersectRect(&rc, &vBossVerticalBullet[i].rc, &PLAYER->getPlayerRect()))
+			{
+				bossVerticalBullet = { 0, };
+				OBJECTPOOL->setBulletVector(bossVerticalBullet);
+				vBossVerticalBullet.erase(vBossVerticalBullet.begin() + i);
+				// 플레이어 히트
+				collisionCheckNum++;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < vBossHorizontalBullet.size(); i++)		// 호리젠탈
+	{
+		RECT rc;
+		if (getDistance(vBossHorizontalBullet[i].x, vBossHorizontalBullet[i].y,
+			PLAYER->getPlayerRectX(), PLAYER->getPlayerRectY()) <= PLAYERHIT)
+		{
+			if (IntersectRect(&rc, &vBossHorizontalBullet[i].rc, &PLAYER->getPlayerRect()))
+			{
+				bossHorizontalBullet = { 0, };
+				OBJECTPOOL->setBulletVector(bossHorizontalBullet);
+				vBossHorizontalBullet.erase(vBossHorizontalBullet.begin() + i);
+				// 플레이어 히트
+				collisionCheckNum++;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < vBossRightSpinBullet.size(); i++)		// 라이트 스핀
+	{
+		RECT rc;
+		if (getDistance(vBossRightSpinBullet[i].x, vBossRightSpinBullet[i].y,
+			PLAYER->getPlayerRectX(), PLAYER->getPlayerRectY()) <= PLAYERHIT)
+		{
+			if (IntersectRect(&rc, &vBossRightSpinBullet[i].rc, &PLAYER->getPlayerRect()))
+			{
+				bossRightSpinBullet = { 0, };
+				OBJECTPOOL->setBulletVector(bossRightSpinBullet);
+				vBossRightSpinBullet.erase(vBossRightSpinBullet.begin() + i);
+				// 플레이어 히트
+				collisionCheckNum++;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < vBossLeftSpinBullet.size(); i++)		// 레프트 스핀
+	{
+		RECT rc;
+		if (getDistance(vBossLeftSpinBullet[i].x, vBossLeftSpinBullet[i].y,
+			PLAYER->getPlayerRectX(), PLAYER->getPlayerRectY()) <= PLAYERHIT)
+		{
+			if (IntersectRect(&rc, &vBossLeftSpinBullet[i].rc, &PLAYER->getPlayerRect()))
+			{
+				bossLeftSpinBullet = { 0, };
+				OBJECTPOOL->setBulletVector(bossLeftSpinBullet);
+				vBossLeftSpinBullet.erase(vBossLeftSpinBullet.begin() + i);
+				// 플레이어 히트
+				collisionCheckNum++;
+				break;
+			}
+		}
+	}
+	for (int i = 0; i < vBossCommonBullet.size(); i++)		// 커먼
+	{
+		RECT rc;
+		if (getDistance(vBossCommonBullet[i].x, vBossCommonBullet[i].y,
+			PLAYER->getPlayerRectX(), PLAYER->getPlayerRectY()) <= PLAYERHIT)
+		{
+			if (IntersectRect(&rc, &vBossCommonBullet[i].rc, &PLAYER->getPlayerRect()))
+			{
+				bossCommonBullet = { 0, };
+				OBJECTPOOL->setBulletVector(bossCommonBullet);
+				vBossCommonBullet.erase(vBossCommonBullet.begin() + i);
+				// 플레이어 히트
+				collisionCheckNum++;
+				break;
+			}
+		}
+	}
+}
+
+void bulletManager::bossVerticalBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval)
+{
+	bossVerticalBullet = OBJECTPOOL->getBullet();
+	bossVerticalCannon.center.x = x;
+	bossVerticalCannon.center.y = y;
+	bossVerticalCannon.angle = angle;
+
+	bossVerticalBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
+	bossVerticalBullet.speed = bulletSpeed;
+	bossVerticalBullet.angle = bossVerticalCannon.angle;
+
+	if (bossVerticalBulletSpeed % interval == 0)		// 총알간 거리 조절
+	{
+		// 총알 무브
+		bossVerticalBullet.x = bossVerticalCannon.center.x;
+		bossVerticalBullet.y = bossVerticalCannon.center.y;
+		bossVerticalBullet.rc = RectMakeCenter(bossVerticalBullet.x,
+			bossVerticalBullet.y,
+			bossVerticalBullet.bulletImage->getWidth(),
+			bossVerticalBullet.bulletImage->getHeight());
+		//
+	}
+	vBossVerticalBullet.push_back(bossVerticalBullet);
+
+	bossVerticalCannon.cannonEnd.x = cosf(bossVerticalCannon.angle) * bossVerticalCannon.cannon + bossVerticalCannon.center.x;
+	bossVerticalCannon.cannonEnd.y = -sinf(bossVerticalCannon.angle) * bossVerticalCannon.cannon + bossVerticalCannon.center.y;
+}
+
+void bulletManager::bossVerticalBulletMove()
+{
+	bossVerticalBulletSpeed++;
+
+	// 총알 발사
+	viBossVerticalBullet = vBossVerticalBullet.begin();
+	for (viBossVerticalBullet; viBossVerticalBullet != vBossVerticalBullet.end();)
+	{
+		viBossVerticalBullet->x += cosf(viBossVerticalBullet->angle) * viBossVerticalBullet->speed;
+		viBossVerticalBullet->y += -sinf(viBossVerticalBullet->angle) * viBossVerticalBullet->speed;
+
+		viBossVerticalBullet->rc = RectMakeCenter(viBossVerticalBullet->x,
+			viBossVerticalBullet->y, viBossVerticalBullet->bulletImage->getWidth(),
+			viBossVerticalBullet->bulletImage->getHeight());
+
+		if (50 >= viBossVerticalBullet->rc.right || WINSIZEY + 200 <= viBossVerticalBullet->rc.top ||
+			WINSIZEX - 300 <= viBossVerticalBullet->rc.left || -200 > viBossVerticalBullet->rc.bottom)
+		{
+			bossVerticalBullet = { 0, };
+			OBJECTPOOL->setBulletVector(bossVerticalBullet);
+			viBossVerticalBullet = vBossVerticalBullet.erase(viBossVerticalBullet);
+		}
+		else ++viBossVerticalBullet;
+	}
+}
+
+void bulletManager::bossVerticalBulletRender()
+{
+	for (viBossVerticalBullet = vBossVerticalBullet.begin(); viBossVerticalBullet != vBossVerticalBullet.end(); ++viBossVerticalBullet)
+	{
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), viBossVerticalBullet->rc.left, viBossVerticalBullet->rc.top, viBossVerticalBullet->rc.right, viBossVerticalBullet->rc.bottom);
+		}
+
+		viBossVerticalBullet->bulletImage->render(getMemDC(), viBossVerticalBullet->rc.left, viBossVerticalBullet->rc.top);
+	}
+}
+
+void bulletManager::bossHorizontalBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval)
+{
+	bossHorizontalBullet = OBJECTPOOL->getBullet();
+	bossHorizontalCannon.center.x = x;
+	bossHorizontalCannon.center.y = y;
+	bossHorizontalCannon.angle = angle;
+
+	bossHorizontalBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
+	bossHorizontalBullet.speed = bulletSpeed;
+	bossHorizontalBullet.angle = bossHorizontalCannon.angle;
+
+	if (bossHorizontalBulletSpeed % interval == 0)		// 총알간 거리 조절
+	{
+		// 총알 무브
+		bossHorizontalBullet.x = bossHorizontalCannon.center.x;
+		bossHorizontalBullet.y = bossHorizontalCannon.center.y;
+		bossHorizontalBullet.rc = RectMakeCenter(bossHorizontalBullet.x,
+			bossHorizontalBullet.y,
+			bossHorizontalBullet.bulletImage->getWidth(),
+			bossHorizontalBullet.bulletImage->getHeight());
+		//
+	}
+	vBossHorizontalBullet.push_back(bossHorizontalBullet);
+
+	bossHorizontalCannon.cannonEnd.x = cosf(bossHorizontalCannon.angle) * bossHorizontalCannon.cannon + bossHorizontalCannon.center.x;
+	bossHorizontalCannon.cannonEnd.y = -sinf(bossHorizontalCannon.angle) * bossHorizontalCannon.cannon + bossHorizontalCannon.center.y;
+}
+
+void bulletManager::bossHorizontalBulletMove()
+{
+	bossHorizontalBulletSpeed++;
+
+	// 총알 발사
+	viBossHorizontalBullet = vBossHorizontalBullet.begin();
+	for (viBossHorizontalBullet; viBossHorizontalBullet != vBossHorizontalBullet.end();)
+	{
+		viBossHorizontalBullet->x += cosf(viBossHorizontalBullet->angle) * viBossHorizontalBullet->speed;
+		viBossHorizontalBullet->y += -sinf(viBossHorizontalBullet->angle) * viBossHorizontalBullet->speed;
+
+		viBossHorizontalBullet->rc = RectMakeCenter(viBossHorizontalBullet->x,
+			viBossHorizontalBullet->y, viBossHorizontalBullet->bulletImage->getWidth(),
+			viBossHorizontalBullet->bulletImage->getHeight());
+
+		if (-100 >= viBossHorizontalBullet->rc.right || WINSIZEY <= viBossHorizontalBullet->rc.top ||
+			WINSIZEX - 200 <= viBossHorizontalBullet->rc.left || 50 > viBossHorizontalBullet->rc.bottom)
+		{
+			bossHorizontalBullet = { 0, };
+			OBJECTPOOL->setBulletVector(bossHorizontalBullet);
+			viBossHorizontalBullet = vBossHorizontalBullet.erase(viBossHorizontalBullet);
+		}
+		else ++viBossHorizontalBullet;
+	}
+}
+
+void bulletManager::bossHorizontalBulletRender()
+{
+	for (viBossHorizontalBullet = vBossHorizontalBullet.begin(); viBossHorizontalBullet != vBossHorizontalBullet.end(); ++viBossHorizontalBullet)
+	{
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), viBossHorizontalBullet->rc.left, viBossHorizontalBullet->rc.top, viBossHorizontalBullet->rc.right, viBossHorizontalBullet->rc.bottom);
+		}
+
+		viBossHorizontalBullet->bulletImage->render(getMemDC(), viBossHorizontalBullet->rc.left, viBossHorizontalBullet->rc.top);
+	}
+}
+
+void bulletManager::bossRightSpinBulletFire(string bulletKind, float x, float y, int interval)
+{
+	bossRightSpinBullet = OBJECTPOOL->getBullet();
+	bossRightSpinCannon.center.x = x;
+	bossRightSpinCannon.center.y = y;
+	bossRightSpinCannon.cannon = 100;
+
+	bossRightSpinBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
+	bossRightSpinBullet.speed = 5.0f;
+	bossRightSpinBullet.angle = bossRightSpinCannon.angle;
+
+	if (bossRightSpinBulletSpeed % interval == 0)		// 총알간 거리 조절
+	{
+		// 총알 무브
+		//redMinionCannon.angle -=0.05f;
+		bossRightSpinBullet.x = bossRightSpinCannon.center.x;
+		bossRightSpinBullet.y = bossRightSpinCannon.center.y;
+		bossRightSpinBullet.rc = RectMakeCenter(bossRightSpinBullet.x,
+			bossRightSpinBullet.y,
+			bossRightSpinBullet.bulletImage->getWidth(),
+			bossRightSpinBullet.bulletImage->getHeight());
+		//
+	}
+	vBossRightSpinBullet.push_back(bossRightSpinBullet);
+
+	bossRightSpinCannon.cannonEnd.x = cosf(bossRightSpinCannon.angle) * bossRightSpinCannon.cannon + bossRightSpinCannon.center.x;
+	bossRightSpinCannon.cannonEnd.y = -sinf(bossRightSpinCannon.angle) * bossRightSpinCannon.cannon + bossRightSpinCannon.center.y;
+}
+
+void bulletManager::bossRightSpinBulletMove()
+{
+	bossRightSpinBulletSpeed++;
+
+	if (bossRightSpinBulletSpeed % 1 == 0)		// 총알발사 각도 조절
+	{
+		bossRightSpinCannon.angle -= 0.05f;
+	}
+
+	// 총알 발사
+	viBossRightSpinBullet = vBossRightSpinBullet.begin();
+	for (viBossRightSpinBullet; viBossRightSpinBullet != vBossRightSpinBullet.end();)
+	{
+		viBossRightSpinBullet->x += cosf(viBossRightSpinBullet->angle) * viBossRightSpinBullet->speed;
+		viBossRightSpinBullet->y += -sinf(viBossRightSpinBullet->angle) * viBossRightSpinBullet->speed;
+
+		viBossRightSpinBullet->rc = RectMakeCenter(viBossRightSpinBullet->x,
+			viBossRightSpinBullet->y, viBossRightSpinBullet->bulletImage->getWidth(),
+			viBossRightSpinBullet->bulletImage->getHeight());
+
+		if (100 >= viBossRightSpinBullet->rc.right || WINSIZEY <= viBossRightSpinBullet->rc.top ||
+			WINSIZEX - 300 <= viBossRightSpinBullet->rc.left || 50 > viBossRightSpinBullet->rc.bottom)
+		{
+			bossRightSpinBullet = { 0, };
+			OBJECTPOOL->setBulletVector(bossRightSpinBullet);
+			viBossRightSpinBullet = vBossRightSpinBullet.erase(viBossRightSpinBullet);
+		}
+		else ++viBossRightSpinBullet;
+	}
+}
+
+void bulletManager::bossRightSpinBulletRender()
+{
+	for (viBossRightSpinBullet = vBossRightSpinBullet.begin(); viBossRightSpinBullet != vBossRightSpinBullet.end(); ++viBossRightSpinBullet)
+	{
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), viBossRightSpinBullet->rc.left, viBossRightSpinBullet->rc.top, viBossRightSpinBullet->rc.right, viBossRightSpinBullet->rc.bottom);
+		}
+
+		viBossRightSpinBullet->bulletImage->render(getMemDC(), viBossRightSpinBullet->rc.left, viBossRightSpinBullet->rc.top);
+	}
+}
+
+void bulletManager::bossLeftSpinBulletFire(string bulletKind, float x, float y, int interval)
+{
+	bossLeftSpinBullet = OBJECTPOOL->getBullet();
+	bossLeftSpinCannon.center.x = x;
+	bossLeftSpinCannon.center.y = y;
+	bossLeftSpinCannon.cannon = 100;
+
+	bossLeftSpinBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
+	bossLeftSpinBullet.speed = 5.0f;
+	bossLeftSpinBullet.angle = bossLeftSpinCannon.angle;
+
+	if (bossLeftSpinBulletSpeed % interval == 0)		// 총알간 거리 조절
+	{
+		// 총알 무브
+		//redMinionCannon.angle -=0.05f;
+		bossLeftSpinBullet.x = bossLeftSpinCannon.center.x;
+		bossLeftSpinBullet.y = bossLeftSpinCannon.center.y;
+		bossLeftSpinBullet.rc = RectMakeCenter(bossLeftSpinBullet.x,
+			bossLeftSpinBullet.y,
+			bossLeftSpinBullet.bulletImage->getWidth(),
+			bossLeftSpinBullet.bulletImage->getHeight());
+		//
+	}
+	vBossLeftSpinBullet.push_back(bossLeftSpinBullet);
+
+	bossLeftSpinCannon.cannonEnd.x = cosf(bossLeftSpinCannon.angle) * bossLeftSpinCannon.cannon + bossLeftSpinCannon.center.x;
+	bossLeftSpinCannon.cannonEnd.y = -sinf(bossLeftSpinCannon.angle) * bossLeftSpinCannon.cannon + bossLeftSpinCannon.center.y;
+}
+
+void bulletManager::bossLeftSpinBulletMove()
+{
+	bossLeftSpinBulletSpeed++;
+
+	if (bossLeftSpinBulletSpeed % 1 == 0)		// 총알발사 각도 조절
+	{
+		bossLeftSpinCannon.angle -= 0.05f;
+	}
+
+	// 총알 발사
+	viBossLeftSpinBullet = vBossLeftSpinBullet.begin();
+	for (viBossLeftSpinBullet; viBossLeftSpinBullet != vBossLeftSpinBullet.end();)
+	{
+		viBossLeftSpinBullet->x -= cosf(viBossLeftSpinBullet->angle) * viBossLeftSpinBullet->speed;
+		viBossLeftSpinBullet->y -= -sinf(viBossLeftSpinBullet->angle) * viBossLeftSpinBullet->speed;
+
+		viBossLeftSpinBullet->rc = RectMakeCenter(viBossLeftSpinBullet->x,
+			viBossLeftSpinBullet->y, viBossLeftSpinBullet->bulletImage->getWidth(),
+			viBossLeftSpinBullet->bulletImage->getHeight());
+
+		if (100 >= viBossLeftSpinBullet->rc.right || WINSIZEY <= viBossLeftSpinBullet->rc.top ||
+			WINSIZEX - 300 <= viBossLeftSpinBullet->rc.left || 50 > viBossLeftSpinBullet->rc.bottom)
+		{
+			bossLeftSpinBullet = { 0, };
+			OBJECTPOOL->setBulletVector(bossLeftSpinBullet);
+			viBossLeftSpinBullet = vBossLeftSpinBullet.erase(viBossLeftSpinBullet);
+		}
+		else ++viBossLeftSpinBullet;
+	}
+}
+
+void bulletManager::bossLeftSpinBulletRender()
+{
+	for (viBossLeftSpinBullet = vBossLeftSpinBullet.begin(); viBossLeftSpinBullet != vBossLeftSpinBullet.end(); ++viBossLeftSpinBullet)
+	{
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), viBossLeftSpinBullet->rc.left, viBossLeftSpinBullet->rc.top, viBossLeftSpinBullet->rc.right, viBossLeftSpinBullet->rc.bottom);
+		}
+
+		viBossLeftSpinBullet->bulletImage->render(getMemDC(), viBossLeftSpinBullet->rc.left, viBossLeftSpinBullet->rc.top);
+	}
+}
+
+void bulletManager::bossCommonBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval)
+{
+	bossCommonBullet = OBJECTPOOL->getBullet();
+	bossCommonCannon.center.x = x;
+	bossCommonCannon.center.y = y;
+	bossCommonCannon.angle = angle;
+
+	bossCommonBullet.bulletImage = IMAGEMANAGER->findImage(bulletKind);
+	bossCommonBullet.speed = bulletSpeed;
+	bossCommonBullet.angle = bossCommonCannon.angle;
+
+	if (bossCommonBulletSpeed % interval == 0)		// 총알간 거리 조절
+	{
+		// 총알 무브
+		bossCommonBullet.x = bossCommonCannon.center.x;
+		bossCommonBullet.y = bossCommonCannon.center.y;
+		bossCommonBullet.rc = RectMakeCenter(bossCommonBullet.x,
+			bossCommonBullet.y,
+			bossCommonBullet.bulletImage->getWidth(),
+			bossCommonBullet.bulletImage->getHeight());
+		//
+	}
+	vBossCommonBullet.push_back(bossCommonBullet);
+
+	bossCommonCannon.cannonEnd.x = cosf(bossCommonCannon.angle) * bossCommonCannon.cannon + bossCommonCannon.center.x;
+	bossCommonCannon.cannonEnd.y = -sinf(bossCommonCannon.angle) * bossCommonCannon.cannon + bossCommonCannon.center.y;
+
+}
+
+void bulletManager::bossCommonBulletMove()
+{
+	bossCommonBulletSpeed++;
+
+	// 총알 발사
+	viBossCommonBullet = vBossCommonBullet.begin();
+	for (viBossCommonBullet; viBossCommonBullet != vBossCommonBullet.end();)
+	{
+		viBossCommonBullet->x += cosf(viBossCommonBullet->angle) * viBossCommonBullet->speed;
+		viBossCommonBullet->y += -sinf(viBossCommonBullet->angle) * viBossCommonBullet->speed;
+
+		viBossCommonBullet->rc = RectMakeCenter(viBossCommonBullet->x,
+			viBossCommonBullet->y, viBossCommonBullet->bulletImage->getWidth(),
+			viBossCommonBullet->bulletImage->getHeight());
+
+		if (100 >= viBossCommonBullet->rc.right || WINSIZEY <= viBossCommonBullet->rc.top ||
+			WINSIZEX - 300 <= viBossCommonBullet->rc.left || 50 > viBossCommonBullet->rc.bottom)
+		{
+			bossCommonBullet = { 0, };
+			OBJECTPOOL->setBulletVector(bossCommonBullet);
+			viBossCommonBullet = vBossCommonBullet.erase(viBossCommonBullet);
+		}
+		else ++viBossCommonBullet;
+	}
+
+}
+
+void bulletManager::bossCommonBulletRender()
+{
+	for (viBossCommonBullet = vBossCommonBullet.begin(); viBossCommonBullet != vBossCommonBullet.end(); ++viBossCommonBullet)
+	{
+		if (KEYMANAGER->isToggleKey(VK_TAB))
+		{
+			Rectangle(getMemDC(), viBossCommonBullet->rc.left, viBossCommonBullet->rc.top, viBossCommonBullet->rc.right, viBossCommonBullet->rc.bottom);
+		}
+
+		viBossCommonBullet->bulletImage->render(getMemDC(), viBossCommonBullet->rc.left, viBossCommonBullet->rc.top);
+	}
+
+}
+

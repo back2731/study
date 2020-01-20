@@ -209,7 +209,7 @@ void player::update()
 
 	// 플레이어 히트박스 업데이트
 	playerHitRect = RectMakeCenter((playerRect.left + (playerRect.right - playerRect.left) / 2),
-		(playerRect.top + (playerRect.bottom - playerRect.top) / 2), 10, 10);
+		(playerRect.top + (playerRect.bottom - playerRect.top) / 2), 8, 8);
 }
 
 void player::render()

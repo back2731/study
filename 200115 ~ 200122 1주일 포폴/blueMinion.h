@@ -6,10 +6,12 @@ class blueMinion : public enemyBase
 private:
 
 	int count;
+	int frameCount;
 
 	float rectX;
 	float rectY;
-
+	
+	int addSpeed;
 public:
 	blueMinion();
 	~blueMinion();

@@ -49,23 +49,34 @@ void yellowMinion::move(int pattern)
 	switch (pattern)
 	{
 	case 0:
-	{	
-		rightAnimation();
+	{		
+		addSpeed++;
+		count++;
 
-		enemyRect.left += 4;
+		if (count >= 0)
+		{
+			leftAnimation();
 
-		enemyRect.right += 4; 
-	}
-		break;
-	case 1:
-	{
-		leftAnimation();
+			enemyRect.left -= addSpeed / 7;
 
-		enemyRect.left -= 4;
-
-		enemyRect.right -= 4;
+			enemyRect.right -= addSpeed / 7;
+		}
 	}
 	break;
+	case 1:
+	{
+		addSpeed++;
+		count++;
+
+		if (count >= 0)
+		{
+			leftAnimation();
+
+			enemyRect.left -= addSpeed / 10;
+
+			enemyRect.right -= addSpeed / 10;
+		}
+	}
 	default:
 		break;
 	}
@@ -73,9 +84,9 @@ void yellowMinion::move(int pattern)
 
 void yellowMinion::leftAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -88,9 +99,9 @@ void yellowMinion::leftAnimation()
 
 void yellowMinion::rightAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 1;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX())
@@ -103,9 +114,9 @@ void yellowMinion::rightAnimation()
 
 void yellowMinion::idleAnimation()
 {
-	count++;
+	frameCount++;
 	currentFrameY = 0;
-	if (count % FRAMESPEED == 0)
+	if (frameCount % FRAMESPEED == 0)
 	{
 		currentFrameX++;
 		if (currentFrameX >= enemyImage->getMaxFrameX() - 6)
