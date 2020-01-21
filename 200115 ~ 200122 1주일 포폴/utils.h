@@ -10,12 +10,19 @@
 #define PI_32		PI / 32
 
 #define ANGLE_0		0
+#define ANGLE_15	PI / 12
 #define ANGLE_30	PI / 6
+#define ANGLE_45	PI / 4
 #define ANGLE_60	PI / 3
+#define ANGLE_75	PI / 12 * 5
 #define ANGLE_90	PI / 2
+#define ANGLE_105	PI / 12 * 7
 #define ANGLE_120	PI / 3 * 2
+#define ANGLE_135	PI / 4 * 3
 #define ANGLE_150	PI / 6 * 5
+#define ANGLE_165	PI / 12 * 11
 #define ANGLE_180	PI
+#define ANGLE_195	PI / 12 * 13
 #define ANGLE_210	PI / 6 * 7
 #define ANGLE_225	PI / 4 * 5
 #define ANGLE_240	PI / 3 * 4

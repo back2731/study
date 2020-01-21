@@ -141,14 +141,14 @@ void player::update()
 	if (KEYMANAGER->isStayKeyDown('Z'))
 	{
 		count++;
-		if (count % 6 == 0)
-		{
-			BULLETMANAGER->playerCommonBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
-		}
-		if (count % 15 == 0)
-		{
-			BULLETMANAGER->playerHomingBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2 - 50, playerRect.top - 50);
-		}
+		//if (count % 6 == 0)
+		//{
+		//	BULLETMANAGER->playerCommonBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2, playerRect.top - 50);
+		//}
+		//if (count % 15 == 0)
+		//{
+		//	BULLETMANAGER->playerHomingBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2 - 50, playerRect.top - 50);
+		//}
 		if (count % 15 == 0)
 		{
 			BULLETMANAGER->playerHomingBulletFire(playerRect.right - (playerRect.right - playerRect.left) / 2 + 50, playerRect.top - 50);

@@ -53,16 +53,40 @@ private:
 	boss*			m_Boss;
 
 	image*			bossCannonImage;
-	RECT			bossCannon;
+	RECT			bossCannon1;
+	int				alphaValue1;
+
+	RECT			bossCannon2;
+	int				alphaValue2;
+	
+	RECT			bossCannon3;
+	int				alphaValue3;
+
+	RECT			bossCannon4;
+	int				alphaValue4;
+
+	RECT			bossCannon5;
+	int				alphaValue5;
+
+	RECT			bossCannon6;
+	int				alphaValue6;
+
+	RECT			bossCannon7;
+	int				alphaValue7;
+
+	RECT			bossCannon8;
+	int				alphaValue8;
+
 	int				frameCount;
 	int				currentFrameX;
 	int				currentFrameY;
-	int				alphaValue;
+
 
 	float rectX;
 	float rectY;
 
 	int count;
+	int bossCount;
 	char str[256];
 
 	bool change;
@@ -117,6 +141,8 @@ public:
 	void deleteBoss(int num);
 	vBoss getVBoss() { return m_vBoss; }
 	viBoss getViBoss() { return m_viBoss; }
+
+	void bossPatternRain(int countNum);
 
 };
 

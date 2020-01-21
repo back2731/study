@@ -49,6 +49,9 @@ HRESULT gameScene::init()
 	IMAGEMANAGER->addImage("greenStarBullet", "images/greenStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("yellowStarBullet", "images/yellowStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("skyStarBullet", "images/skyStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("grayStarBullet", "images/grayStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("orangeStarBullet", "images/orangeStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("purpleStarBullet", "images/purpleStarBullet.bmp", 31, 30, true, RGB(255, 0, 255));
 	
 	IMAGEMANAGER->addImage("redDoubleCircleBullet", "images/redDoubleCircleBullet.bmp", 16, 16, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("blueDoubleCircleBullet", "images/blueDoubleCircleBullet.bmp", 16, 16, true, RGB(255, 0, 255));
@@ -69,19 +72,19 @@ HRESULT gameScene::init()
 
 	//BOSS
 
-	IMAGEMANAGER->addFrameImage("remilia", "images/remilia.bmp", 1188, 150, 8, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("remilia", "images/remilia.bmp", 4351, 1134, 19, 7, true, RGB(255, 0, 255));
 
 	//BOSS BULLET
 
 	IMAGEMANAGER->addFrameImage("spBullet", "images/spBullet.bmp", 2432, 128, 19, 1, true, RGB(0, 0, 0));
 	IMAGEMANAGER->addImage("redVerticalBullet", "images/redVerticalBullet.bmp", 16, 128, true, RGB(0, 0, 0));
 	IMAGEMANAGER->addImage("redHorizontalBullet", "images/redHorizontalBullet.bmp", 128, 16, true, RGB(0, 0, 0));
-	IMAGEMANAGER->addImage("spBullet2", "images/spBullet2.bmp", 128, 128, true, RGB(0, 0, 0));
-	IMAGEMANAGER->addImage("spBullet3", "images/spBullet3.bmp", 256, 256, true, RGB(0, 0, 0));
+	IMAGEMANAGER->addImage("spBullet2", "images/spBullet2.bmp", 32, 32, true, RGB(0, 0, 0));
+	IMAGEMANAGER->addImage("spBullet3", "images/spBullet3.bmp", 32, 32, true, RGB(0, 0, 0));
 	IMAGEMANAGER->addImage("spBullet4", "images/spBullet4.bmp", 256, 256, true, RGB(0, 0, 0));
 	IMAGEMANAGER->addImage("spBullet4", "images/spBullet4.bmp", 256, 256, true, RGB(0, 0, 0));
-	IMAGEMANAGER->addImage("spbulletSmall1", "images/spbulletSmall1.bmp", 16, 16, true, RGB(0, 0, 0));
-	IMAGEMANAGER->addImage("spbulletSmall2", "images/spbulletSmall2.bmp", 16, 16, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("spbulletSmall1", "images/spbulletSmall1.bmp", 32, 32, true, RGB(0, 0, 0));
+	IMAGEMANAGER->addImage("spbulletSmall2", "images/spbulletSmall2.bmp", 32, 32, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("bulletCanon", "images/bulletCanon.bmp", 128, 128, true, RGB(0, 0, 0));
 
 	//
@@ -119,7 +122,7 @@ void gameScene::update()
 	}
 	else
 	{
-		change = false;;
+		change = false;
 		addSpeed++;
 		if (addSpeed <= 100)
 		{
@@ -147,8 +150,8 @@ void gameScene::render()
 	//IMAGEMANAGER->loopRender("stageBG", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), loopX, loopY);
 	IMAGEMANAGER->loopAlphaRender("bossBackGround", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), 0, 0, bossBG);
 	IMAGEMANAGER->loopAlphaRender("stageBG", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), loopX, loopY, stageBG);
-	PLAYER->render();
 	ENEMYMANAGER->render();
+	PLAYER->render();
 	IMAGEMANAGER->render("UIConsole", getMemDC());
 	OBJECTPOOL->render(getMemDC());
 }

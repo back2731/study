@@ -33,7 +33,7 @@ public:
 	void release();
 	void update();
 	void render();
-
+	
 	RECT getPlayerRect() { return playerHitRect; }
 	int getPlayerRectX() { return (playerHitRect.left + (playerHitRect.right - playerHitRect.left) / 2); }
 	int getPlayerRectY() { return (playerHitRect.top + (playerHitRect.bottom - playerHitRect.top) / 2); }

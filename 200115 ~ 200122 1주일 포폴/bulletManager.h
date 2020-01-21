@@ -119,7 +119,7 @@ private:
 	bulletInfo bossHorizontalBullet;
 	tagCannon bossHorizontalCannon;
 	int bossHorizontalBulletSpeed;
-
+	
 	// ∫∏Ω∫ ∂Û¿Ã∆Æ Ω∫«… ∫“∏¥
 	vector<bulletInfo> vBossRightSpinBullet;
 	vector<bulletInfo>::iterator viBossRightSpinBullet;
@@ -141,13 +141,20 @@ private:
 	tagCannon bossCommonCannon;
 	int bossCommonBulletSpeed;
 
+	// ∫∏Ω∫ »£π÷ ∫“∏¥
+	vector<bulletInfo> vBossHomingBullet;
+	vector<bulletInfo>::iterator viBossHomingBullet;
+	bulletInfo bossHomingBullet;
+	tagCannon bossHomingCannon;
+	int bossHomingBulletSpeed;
+
 
 	int collisionCheckNum;
 
 public:
 	bulletManager();
 	~bulletManager();
-
+	
 	HRESULT init();
 	void release();
 	void update();
@@ -222,6 +229,10 @@ public:
 	void bossCommonBulletFire(string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
 	void bossCommonBulletMove();
 	void bossCommonBulletRender();
+
+	void bossHomingBulletFire(string bulletKind, float x, float y, float playerX, float playerY, float bulletSpeed, int interval);
+	void bossHomingBulletMove();
+	void bossHomingBulletRender();
 
 };
 
