@@ -138,7 +138,7 @@ public:
 	void bossRender(int pattern);
 	void setBoss();
 	void bossBulletFire(int pattern);
-	void deleteBoss(int num);
+
 	vBoss getVBoss() { return m_vBoss; }
 	viBoss getViBoss() { return m_viBoss; }
 

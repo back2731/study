@@ -52,9 +52,6 @@
     <Filter Include="mainGame\enemy">
       <UniqueIdentifier>{bc9e97e4-bb1d-47cf-8ccd-082a3d049a00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="mainGame\item">
-      <UniqueIdentifier>{e7b5b76a-0a20-4029-9fe2-3bcc127c6a5b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mainGame\ui">
       <UniqueIdentifier>{95e36c87-c0b9-4844-bfff-3ec8bc366dd7}</UniqueIdentifier>
     </Filter>
@@ -63,9 +60,6 @@
     </Filter>
     <Filter Include="mainGame\enemy\minion">
       <UniqueIdentifier>{b0e1d75f-ab16-41fd-b890-15400e21aa2e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="mainGame\enemy\middleMinion">
-      <UniqueIdentifier>{ad19741c-af76-4292-95c1-3b9a838b64c0}</UniqueIdentifier>
     </Filter>
     <Filter Include="mainGame\enemy\base&amp;manager">
       <UniqueIdentifier>{d80b2127-1577-4b23-93a9-4354bc662b8d}</UniqueIdentifier>

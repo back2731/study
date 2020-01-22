@@ -18,6 +18,31 @@ HRESULT enemyManager::init()
 
 	setBoss();
 
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon1 = RectMakeCenter(325, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon2 = RectMakeCenter(225, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon3 = RectMakeCenter(225, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon4 = RectMakeCenter(325, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon5 = RectMakeCenter(525, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon6 = RectMakeCenter(625, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon7 = RectMakeCenter(625, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	bossCannon8 = RectMakeCenter(525, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+
+
 	alphaValue1 = 0;
 	alphaValue2 = 0;
 	alphaValue3 = 0;
@@ -43,435 +68,481 @@ void enemyManager::release()
 void enemyManager::update()
 {
 
-	count++;
-	if (count == 100)
+	if (m_vBoss.size() > 0)
 	{
-		setRedMinion(0);
-		setBlueMinion(0);
-		setGreenMinion(0);
-	}
-	if (count >= 100 && count < 800)
-	{
-		redMinionUpdate(0);
-		blueMinionUpdate(0);
-	}
-	if (count >= 300 && count < 500)
-	{
-		greenMinionUpdate(0);
-		greenMinionBulletFire(0);
-	}
-	if (count >= 500 && count < 730)
-	{
-		greenMinionUpdate(0);
-		greenMinionBulletFire(1);
-		greenMinionBulletFire(2);
-	}
-	if (count == 600)
-	{
-		setYellowMinion(0);
-	}
-	if (count >= 600 && count <850)
-	{
-		yellowMinionUpdate(0);
-	}
-	if (count == 730)
-	{
-		setGreenMinion(1);
-	}
-	if (count >= 730 && count < 1200)
-	{
-		greenMinionUpdate(1);
-		greenMinionBulletFire(3);
-	}
-	if (count == 850)
-	{
-		setBlueMinion(1);
-	}
-	if (count >= 850 && count < 1250)
-	{
-		blueMinionUpdate(1);
-	}
-	if (count == 1000)
-	{
-		setRedMinion(1);
-	}
-	if (count >= 1000 && count < 1350)
-	{
-		redMinionUpdate(1);
-	}
-	if (count == 1200)
-	{
-		setGreenMinion(2);
-		setYellowMinion(1);
-	}
-	if (count >= 1200 && count < 1800)
-	{
-		greenMinionUpdate(2);
-		yellowMinionUpdate(1);
-	}
-
-	BULLETMANAGER->enemyBulletCollision();
-	if (count >= 1700 && m_vBoss.size() > 0)
-	{
-		bossUpdate(0);
-
-		if (count >= 2150 && count < 2350)
+		count++;
+		if (count == 100)
 		{
-			m_vBoss[0]->move(FLY);
+			setRedMinion(0);
+			setBlueMinion(0);
+			setGreenMinion(0);
 		}
-		if (count >= 2350 && count < 2550)
+		if (count >= 100 && count < 800)
 		{
-			m_vBoss[0]->move(IDLE);
+			redMinionUpdate(0);
+			blueMinionUpdate(0);
 		}
-		if (count >= 2550 && count < 2670)
+		if (count >= 300 && count < 500)
 		{
-			m_vBoss[0]->move(THROWSPEAR);
+			greenMinionUpdate(0);
+			greenMinionBulletFire(0);
 		}
-		if (count >= 2520 && count < 2620)
+		if (count >= 500 && count < 730)
 		{
-			bossBulletFire(2);
+			greenMinionUpdate(0);
+			greenMinionBulletFire(1);
+			greenMinionBulletFire(2);
 		}
-		if (count >= 2670 && count < 3250)
+		if (count == 600)
 		{
-			m_vBoss[0]->move(IDLE);
+			setYellowMinion(0);
 		}
-
-		bossPatternRain(2750);
-
-		if (count >= 3250 && count < 3300)
+		if (count >= 600 && count < 850)
 		{
-			m_vBoss[0]->move(UP);
-			m_vBoss[0]->move(WORKLEFT);
+			yellowMinionUpdate(0);
 		}
-		if (count >= 3300 && count < 3350)
+		if (count == 730)
 		{
-			m_vBoss[0]->move(IDLE);
+			setGreenMinion(1);
 		}
-		if (count >= 3350 && count < 3400)
+		if (count >= 730 && count < 1200)
 		{
-			m_vBoss[0]->move(LEFT);
-			m_vBoss[0]->move(WORKLEFT);
+			greenMinionUpdate(1);
+			greenMinionBulletFire(3);
 		}
-		if (count >= 3400 && count < 3450)
+		if (count == 850)
 		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue1 += 2;
+			setBlueMinion(1);
 		}
-		if (count >= 3450 && count < 3500)
+		if (count >= 850 && count < 1250)
 		{
-			m_vBoss[0]->move(LEFTDOWN);
-			m_vBoss[0]->move(WORKLEFT);
+			blueMinionUpdate(1);
 		}
-		if (count >= 3500 && count < 3550)
+		if (count == 1000)
 		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue2 += 2;
+			setRedMinion(1);
 		}
-		if (count >= 3550 && count < 3650)
+		if (count >= 1000 && count < 1350)
 		{
-			m_vBoss[0]->move(DOWN);
-			m_vBoss[0]->move(IDLE);
+			redMinionUpdate(1);
 		}
-		if (count >= 3650 && count < 3700)
+		if (count == 1200)
 		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue3 += 2;
+			setGreenMinion(2);
+			setYellowMinion(1);
 		}
-		if (count >= 3700 && count < 3750)
+		if (count >= 1200 && count < 1800)
 		{
-			m_vBoss[0]->move(RIGHTDOWN);
-			m_vBoss[0]->move(WORKRIGHT);
+			greenMinionUpdate(2);
+			yellowMinionUpdate(1);
 		}
-		if (count >= 3750 && count < 3800)
+		BULLETMANAGER->enemyBulletCollision();
+		if (count >= 1700)
 		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue4 += 2;
-		}
-		if (count >= 3800 && count < 3900)
-		{
-			m_vBoss[0]->move(RIGHT);
-			m_vBoss[0]->move(WORKRIGHT);
-		}
-		if (count >= 3900 && count < 3950)
-		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue5 += 2;
-		}
-		if (count >= 3950 && count < 4000)
-		{
-			m_vBoss[0]->move(RIGHTUP);
-			m_vBoss[0]->move(WORKRIGHT);
-		}
-		if (count >= 4000 && count < 4050)
-		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue6 += 2;
-		}
-		if (count >= 4050 && count < 4150)
-		{
-			m_vBoss[0]->move(UP);
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 4150 && count < 4200)
-		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue7 += 2;
-		}
-		if (count >= 4200 && count < 4250)
-		{
-			m_vBoss[0]->move(LEFTUP);
-			m_vBoss[0]->move(WORKLEFT);
-		}
-		if (count >= 4250 && count < 4300)
-		{
-			m_vBoss[0]->move(IDLE);
-			alphaValue8 += 2;
-		}
-		if (count >= 4300 && count < 4350)
-		{
-			m_vBoss[0]->move(LEFT);
-			m_vBoss[0]->move(WORKLEFT);
-		}
-		if (count >= 4350 && count < 4400)
-		{
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 4400 && count < 4500)
-		{
-			m_vBoss[0]->move(DOWN);
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 4500 && count < 4650)
-		{
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 4700 && count < 6400)
-		{
-			m_vBoss[0]->move(MAGICCASTING);
-		}
-		if (count >= 3250 && count < 4500)
-		{
-			bossBulletFire(5);
-			bossBulletFire(0);
-			bossBulletFire(1);
-		}
-		if (count >= 4700 && count < 5700)
-		{
-			bossBulletFire(6);
-		}
-		if (count >= 4700 && count < 4750)
-		{
-			alphaValue1 += 2;
-		}
-		if (count >= 4800 && count < 5800)
-		{
-			bossBulletFire(7);
-		}
-		if (count >= 4800 && count < 4850)
-		{
-			alphaValue8 += 2;
-		}
-		if (count >= 4900 && count < 5900)
-		{
-			bossBulletFire(8);
-		}
-		if (count >= 4900 && count < 4950)
-		{
-			alphaValue4 += 2;
-		}
-		if (count >= 5000 && count < 6000)
-		{
-			bossBulletFire(9);
-		}
-		if (count >= 5000 && count < 5050)
-		{
-			alphaValue5 += 2;
-		}
-		if (count >= 5100 && count < 6100)
-		{
-			bossBulletFire(10);
-		}
-		if (count >= 5100 && count < 5150)
-		{
-			alphaValue2 += 2;
-		}
-		if (count >= 5200 && count < 6200)
-		{
-			bossBulletFire(11);
-		}
-		if (count >= 5200 && count < 5250)
-		{
-			alphaValue3 += 2;
-		}
-		if (count >= 5300 && count < 6300)
-		{
-			bossBulletFire(12);
-		}
-		if (count >= 5300 && count < 5350)
-		{
-			alphaValue7 += 2;
-		}
-		if (count >= 5400 && count < 6400)
-		{
-			bossBulletFire(13);
-		}
-		if (count >= 5400 && count < 5450)
-		{
-			alphaValue6 += 2;
-		}
-		if (count >= 6400 && count < 6500)
-		{
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 6500 && count < 6640)
-		{
-			m_vBoss[0]->move(DRAWCARD);
-		}
-		if (count >= 6620 && count < 6670)
-		{
-			if (alphaValue3 != 30)
+			bossUpdate(0);
+			if (m_vBoss[0]->getHp() == 0)
 			{
-				alphaValue2--;
-				alphaValue3--;
-				alphaValue4--;
-				alphaValue5--;
-				alphaValue6--;
-				alphaValue7--;				
+				m_vBoss[0]->move(IDLE);
+				m_vBoss[0]->move(UP);
+				count = 100000;
+				if (alphaValue1 != 0)
+				{
+					alphaValue1 -= 2;
+				}
+				if (alphaValue2 != 0)
+				{
+					alphaValue2 -= 2;
+				}
+				if (alphaValue3 != 0)
+				{
+					alphaValue3 -= 2;
+				}
+				if (alphaValue4 != 0)
+				{
+					alphaValue4 -= 2;
+				}
+				if (alphaValue5 != 0)
+				{
+					alphaValue5 -= 2;
+				}
+				if (alphaValue6 != 0)
+				{
+					alphaValue6 -= 2;
+				}
+				if (alphaValue7 != 0)
+				{
+					alphaValue7 -= 2;
+				}
+				if (alphaValue8 != 0)
+				{
+					alphaValue8 -= 2;
+				}
+			}
+			if (count >= 2150 && count < 2350)
+			{
+				m_vBoss[0]->move(FLY);
+			}
+			if (count >= 2350 && count < 2550)
+			{
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 2550 && count < 2670)
+			{
+				m_vBoss[0]->move(THROWSPEAR);
+			}
+			if (count >= 2520 && count < 2620)
+			{
+				bossBulletFire(2);
+			}
+			if (count >= 2670 && count < 3250)
+			{
+				m_vBoss[0]->move(IDLE);
 			}
 
-			if (alphaValue1 != 15)
-			{
-				alphaValue1--;
-				alphaValue8--;
-			}
-			bossCannon2.top -= 2;
-			bossCannon2.bottom -= 2;
-			bossCannon7.top -= 2;
-			bossCannon7.bottom -= 2;
+			bossPatternRain(2750);
 
-			bossCannon3.top -= 4;
-			bossCannon3.bottom -= 4;
-			bossCannon6.top -= 4;
-			bossCannon6.bottom -= 4;
+			if (count >= 3250 && count < 3300)
+			{
+				m_vBoss[0]->move(UP);
+				m_vBoss[0]->move(WORKLEFT);
+			}
+			if (count >= 3300 && count < 3350)
+			{
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 3350 && count < 3400)
+			{
+				m_vBoss[0]->move(LEFT);
+				m_vBoss[0]->move(WORKLEFT);
+			}
+			if (count >= 3400 && count < 3450)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue1 += 2;
+			}
+			if (count >= 3450 && count < 3500)
+			{
+				m_vBoss[0]->move(LEFTDOWN);
+				m_vBoss[0]->move(WORKLEFT);
+			}
+			if (count >= 3500 && count < 3550)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue2 += 2;
+			}
+			if (count >= 3550 && count < 3650)
+			{
+				m_vBoss[0]->move(DOWN);
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 3650 && count < 3700)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue3 += 2;
+			}
+			if (count >= 3700 && count < 3750)
+			{
+				m_vBoss[0]->move(RIGHTDOWN);
+				m_vBoss[0]->move(WORKRIGHT);
+			}
+			if (count >= 3750 && count < 3800)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue4 += 2;
+			}
+			if (count >= 3800 && count < 3900)
+			{
+				m_vBoss[0]->move(RIGHT);
+				m_vBoss[0]->move(WORKRIGHT);
+			}
+			if (count >= 3900 && count < 3950)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue5 += 2;
+			}
+			if (count >= 3950 && count < 4000)
+			{
+				m_vBoss[0]->move(RIGHTUP);
+				m_vBoss[0]->move(WORKRIGHT);
+			}
+			if (count >= 4000 && count < 4050)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue6 += 2;
+			}
+			if (count >= 4050 && count < 4150)
+			{
+				m_vBoss[0]->move(UP);
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 4150 && count < 4200)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue7 += 2;
+			}
+			if (count >= 4200 && count < 4250)
+			{
+				m_vBoss[0]->move(LEFTUP);
+				m_vBoss[0]->move(WORKLEFT);
+			}
+			if (count >= 4250 && count < 4300)
+			{
+				m_vBoss[0]->move(IDLE);
+				alphaValue8 += 2;
+			}
+			if (count >= 4300 && count < 4350)
+			{
+				m_vBoss[0]->move(LEFT);
+				m_vBoss[0]->move(WORKLEFT);
+			}
+			if (count >= 4350 && count < 4400)
+			{
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 4400 && count < 4500)
+			{
+				m_vBoss[0]->move(DOWN);
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 4500 && count < 4650)
+			{
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 4700 && count < 6400)
+			{
+				m_vBoss[0]->move(MAGICCASTING);
+			}
+			if (count >= 3250 && count < 4500)
+			{
+				bossBulletFire(5);
+				bossBulletFire(0);
+				bossBulletFire(1);
+			}
+			if (count >= 4700 && count < 5700)
+			{
+				bossBulletFire(6);
+			}
+			if (count >= 4700 && count < 4750)
+			{
+				alphaValue1 += 2;
+			}
+			if (count >= 4800 && count < 5800)
+			{
+				bossBulletFire(7);
+			}
+			if (count >= 4800 && count < 4850)
+			{
+				alphaValue8 += 2;
+			}
+			if (count >= 4900 && count < 5900)
+			{
+				bossBulletFire(8);
+			}
+			if (count >= 4900 && count < 4950)
+			{
+				alphaValue4 += 2;
+			}
+			if (count >= 5000 && count < 6000)
+			{
+				bossBulletFire(9);
+			}
+			if (count >= 5000 && count < 5050)
+			{
+				alphaValue5 += 2;
+			}
+			if (count >= 5100 && count < 6100)
+			{
+				bossBulletFire(10);
+			}
+			if (count >= 5100 && count < 5150)
+			{
+				alphaValue2 += 2;
+			}
+			if (count >= 5200 && count < 6200)
+			{
+				bossBulletFire(11);
+			}
+			if (count >= 5200 && count < 5250)
+			{
+				alphaValue3 += 2;
+			}
+			if (count >= 5300 && count < 6300)
+			{
+				bossBulletFire(12);
+			}
+			if (count >= 5300 && count < 5350)
+			{
+				alphaValue7 += 2;
+			}
+			if (count >= 5400 && count < 6400)
+			{
+				bossBulletFire(13);
+			}
+			if (count >= 5400 && count < 5450)
+			{
+				alphaValue6 += 2;
+			}
+			if (count >= 6400 && count < 6500)
+			{
+				m_vBoss[0]->move(IDLE);
+			}
+			if (count >= 6500 && count < 6640)
+			{
+				m_vBoss[0]->move(DRAWCARD);
+			}
+			if (count >= 6620 && count < 6670)
+			{
+				if (alphaValue3 != 30)
+				{
+					alphaValue2--;
+					alphaValue3--;
+					alphaValue4--;
+					alphaValue5--;
+					alphaValue6--;
+					alphaValue7--;
+				}
 
-			bossCannon1.left  += 2;
-			bossCannon1.right += 2;
-			bossCannon2.left += 1;
-			bossCannon2.right += 1;
-								 
-			bossCannon8.left  -= 2;
-			bossCannon8.right -= 2;
-			bossCannon7.left -= 1;
-			bossCannon7.right -= 1;
+				if (alphaValue1 != 15)
+				{
+					alphaValue1--;
+					alphaValue8--;
+				}
+				bossCannon2.top -= 2;
+				bossCannon2.bottom -= 2;
+				bossCannon7.top -= 2;
+				bossCannon7.bottom -= 2;
 
-			bossCannon4.top    -= 4;
-			bossCannon4.bottom -= 4;
-			bossCannon5.top    -= 4;
-			bossCannon5.bottom -= 4;
-		}
-		if (count >= 6640 && count < 8230)
-		{
-			m_vBoss[0]->move(IDLE);
-		}
-		if (count >= 6720 && count < 6770)
-		{
-			alphaValue1 += 2;
-		}
-		if (count >= 6800 && count < 8000)
-		{
-			bossBulletFire(14);
-		}
-		if (count >= 6900 && count < 6950)
-		{
-			alphaValue2 += 2;
-		}
-		if (count >= 6950 && count < 8000)
-		{
-			bossBulletFire(15);
-		}
-		if (count >= 7050 && count < 7100)
-		{
-			alphaValue7 += 2;
-		}
-		if (count >= 7130 && count < 8000)
-		{
-			bossBulletFire(16);
-		}
-		if (count >= 7200 && count < 7250)
-		{
-			alphaValue3 += 2;
-			alphaValue6 += 2;
-		}
-		if (count >= 7300 && count < 8000)
-		{
-			bossBulletFire(17);
-		}
-		if (count >= 7350 && count < 7400)
-		{
-			alphaValue4 += 2;
-			alphaValue5 += 2;
-		}
-		if (count >= 7450 && count < 8000)
-		{
-			bossBulletFire(18);
-		}
-		if (count >= 8050 && count < 8230)
-		{
-			bossCannon1.top		+= 1;
-			bossCannon1.bottom	+= 1;
-			bossCannon8.top		+= 1;
-			bossCannon8.bottom	+= 1;
-		}
-		if (count >= 8000)
-		{
-			if (alphaValue2 != 0)
-			{
-				alphaValue2 -= 2;
+				bossCannon3.top -= 4;
+				bossCannon3.bottom -= 4;
+				bossCannon6.top -= 4;
+				bossCannon6.bottom -= 4;
+
+				bossCannon1.left += 2;
+				bossCannon1.right += 2;
+				bossCannon2.left += 1;
+				bossCannon2.right += 1;
+
+				bossCannon8.left -= 2;
+				bossCannon8.right -= 2;
+				bossCannon7.left -= 1;
+				bossCannon7.right -= 1;
+
+				bossCannon4.top -= 4;
+				bossCannon4.bottom -= 4;
+				bossCannon5.top -= 4;
+				bossCannon5.bottom -= 4;
 			}
-			if (alphaValue3 != 0)
+			if (count >= 6640 && count < 8230)
 			{
-				alphaValue3 -= 2;
+				m_vBoss[0]->move(IDLE);
 			}
-			if (alphaValue4 != 0)
+			if (count >= 6720 && count < 6770)
 			{
-				alphaValue4 -= 2;
+				alphaValue1 += 2;
 			}
-			if (alphaValue5 != 0)
+			if (count >= 6800 && count < 8000)
 			{
-				alphaValue5 -= 2;
-			}	
-			if (alphaValue6 != 0)
+				bossBulletFire(14);
+			}
+			if (count >= 6900 && count < 6950)
 			{
-				alphaValue6 -= 2;
-			}	
-			if (alphaValue7 != 0)
+				alphaValue2 += 2;
+			}
+			if (count >= 6950 && count < 8000)
 			{
-				alphaValue7 -= 2;
+				bossBulletFire(15);
+			}
+			if (count >= 7050 && count < 7100)
+			{
+				alphaValue7 += 2;
+			}
+			if (count >= 7130 && count < 8000)
+			{
+				bossBulletFire(16);
+			}
+			if (count >= 7200 && count < 7250)
+			{
+				alphaValue3 += 2;
+				alphaValue6 += 2;
+			}
+			if (count >= 7300 && count < 8000)
+			{
+				bossBulletFire(17);
+			}
+			if (count >= 7350 && count < 7400)
+			{
+				alphaValue4 += 2;
+				alphaValue5 += 2;
+			}
+			if (count >= 7450 && count < 8000)
+			{
+				bossBulletFire(18);
+			}
+			if (count >= 8050 && count < 8230)
+			{
+				bossCannon1.top += 1;
+				bossCannon1.bottom += 1;
+				bossCannon8.top += 1;
+				bossCannon8.bottom += 1;
+			}
+			if (count >= 8000)
+			{
+				if (alphaValue2 != 0)
+				{
+					alphaValue2 -= 2;
+				}
+				if (alphaValue3 != 0)
+				{
+					alphaValue3 -= 2;
+				}
+				if (alphaValue4 != 0)
+				{
+					alphaValue4 -= 2;
+				}
+				if (alphaValue5 != 0)
+				{
+					alphaValue5 -= 2;
+				}
+				if (alphaValue6 != 0)
+				{
+					alphaValue6 -= 2;
+				}
+				if (alphaValue7 != 0)
+				{
+					alphaValue7 -= 2;
+				}
+			}
+			if (count >= 8230 && count < 9500)
+			{
+				m_vBoss[0]->move(MAGICCASTING);
+			}
+			if (count >= 8250 && count < 9450)
+			{
+				bossBulletFire(19);
+				bossBulletFire(0);
+				bossBulletFire(1);
+			}
+			if (count >= 9500 && count < 15000)
+			{
+				m_vBoss[0]->move(IDLE);
 			}
 		}
-		if (count >= 8230 && count < 9500)
-		{
-			m_vBoss[0]->move(MAGICCASTING);
-		}
-		if (count >= 8250 && count < 9450)
-		{
-			bossBulletFire(19);
-			bossBulletFire(0);
-			bossBulletFire(1);
-		}
-		if (count >= 9500 && count < 15000)
-		{
-			m_vBoss[0]->move(IDLE);
-		}
-	}	
+	}
 	else
 	{
 
+	}
+	if (KEYMANAGER->isOnceKeyDown('1'))
+	{
+		//씬체인지
+		SCENEMANAGER->changeScene("introScene");
 	}
 }
 
 void enemyManager::render()
 {
+
+
 	if (count >= 100 && count < 550)
 	{
 		redMinionRender(0);
@@ -505,20 +576,24 @@ void enemyManager::render()
 
 	bossRender(0);
 
-	sprintf_s(str, "카운트 :  %d", count);
-	TextOut(getMemDC(), 400, 150, str, strlen(str));
+	//sprintf_s(str, "카운트 :  %d", count);
+	//TextOut(getMemDC(), 400, 150, str, strlen(str));
 
-	sprintf_s(str, "레드미니언 사이즈 :  %d", m_vRedMinion.size());
-	TextOut(getMemDC(), 200, 150, str, strlen(str));
 
-	sprintf_s(str, "옐로미니언 사이즈 :  %d", m_vYellowMinion.size());
-	TextOut(getMemDC(), 200, 200, str, strlen(str));
+	//sprintf_s(str, "보스HP :  %d", m_vBoss[0]->getHp());
+	//TextOut(getMemDC(), 400, 200, str, strlen(str));
 
-	sprintf_s(str, "그린미니언 사이즈 :  %d", m_vGreenMinion.size());
-	TextOut(getMemDC(), 200, 250, str, strlen(str));
+	//sprintf_s(str, "레드미니언 사이즈 :  %d", m_vRedMinion.size());
+	//TextOut(getMemDC(), 200, 150, str, strlen(str));
 
-	sprintf_s(str, "블루미니언 사이즈 :  %d", m_vBlueMinion.size());
-	TextOut(getMemDC(), 200, 300, str, strlen(str));
+	//sprintf_s(str, "옐로미니언 사이즈 :  %d", m_vYellowMinion.size());
+	//TextOut(getMemDC(), 200, 200, str, strlen(str));
+
+	//sprintf_s(str, "그린미니언 사이즈 :  %d", m_vGreenMinion.size());
+	//TextOut(getMemDC(), 200, 250, str, strlen(str));
+
+	//sprintf_s(str, "블루미니언 사이즈 :  %d", m_vBlueMinion.size());
+	//TextOut(getMemDC(), 200, 300, str, strlen(str));
 
 }
 
@@ -985,13 +1060,13 @@ void enemyManager::setGreenMinion(int pattern)
 		for (int i = 0; i < 5; i++)
 		{
 			m_greenMinion = new greenMinion;
-			m_greenMinion->init("greenMinion", PointMake(-500 + i * 100, 600));
+			m_greenMinion->init("greenMinion", PointMake(-500 + i * 100, 400));
 			m_vGreenMinion.push_back(m_greenMinion);
 		}
 		for (int i = 5; i < 10; i++)
 		{
 			m_greenMinion = new greenMinion;
-			m_greenMinion->init("greenMinion", PointMake(-500 + (i - 5) * 100, 700));
+			m_greenMinion->init("greenMinion", PointMake(-500 + (i - 5) * 100, 500));
 			m_vGreenMinion.push_back(m_greenMinion);
 		}
 	}
@@ -1051,7 +1126,7 @@ void enemyManager::greenMinionBulletFire(int pattern)
 	{
 		for (m_viGreenMinion = m_vGreenMinion.begin(); m_viGreenMinion != m_vGreenMinion.end(); ++m_viGreenMinion)
 		{
-			BULLETMANAGER->minionSpinBulletFire(2, "greenSmallBullet", (*m_viGreenMinion)->getGreenMinionX(), (*m_viGreenMinion)->getGreenMinionY(), 2);
+			BULLETMANAGER->minionSpinBulletFire(2, "greenSmallBullet", (*m_viGreenMinion)->getGreenMinionX(), (*m_viGreenMinion)->getGreenMinionY(), 5);
 		}
 	}
 	break;
@@ -1152,13 +1227,13 @@ void enemyManager::setYellowMinion(int pattern)
 		for (int i = 0; i < 5; i++)
 		{
 			m_yellowMinion = new yellowMinion;
-			m_yellowMinion->init("yellowMinion", PointMake(950 + (i * 100), 600));
+			m_yellowMinion->init("yellowMinion", PointMake(950 + (i * 100), 400));
 			m_vYellowMinion.push_back(m_yellowMinion);
 		}
 		for (int i = 5; i < 10; i++)
 		{
 			m_yellowMinion = new yellowMinion;
-			m_yellowMinion->init("yellowMinion", PointMake(950 + ((i-5) * 100), 700));
+			m_yellowMinion->init("yellowMinion", PointMake(950 + ((i-5) * 100), 500));
 			m_vYellowMinion.push_back(m_yellowMinion);
 		}
 	}
@@ -1192,7 +1267,7 @@ void enemyManager::yellowMinionBulletFire(int pattern)
 	{
 		for (m_viYellowMinion = m_vYellowMinion.begin(); m_viYellowMinion != m_vYellowMinion.end(); ++m_viYellowMinion)
 		{
-			BULLETMANAGER->minionSpinBulletFire(3, "yellowSmallBullet", (*m_viYellowMinion)->getYellowMinionX(), (*m_viYellowMinion)->getYellowMinionY(), 2);
+			BULLETMANAGER->minionSpinBulletFire(3, "yellowSmallBullet", (*m_viYellowMinion)->getYellowMinionX(), (*m_viYellowMinion)->getYellowMinionY(), 5);
 		}
 	}
 	default:
@@ -1227,18 +1302,18 @@ void enemyManager::bossUpdate(int pattern)
 
 void enemyManager::bossRender(int pattern)
 {	
-	
-	if (KEYMANAGER->isToggleKey(VK_TAB))
-	{
-		Rectangle(getMemDC(), bossCannon1.left, bossCannon1.top, bossCannon1.right, bossCannon1.bottom);
-		Rectangle(getMemDC(), bossCannon2.left, bossCannon2.top, bossCannon2.right, bossCannon2.bottom);
-		Rectangle(getMemDC(), bossCannon3.left, bossCannon3.top, bossCannon3.right, bossCannon3.bottom);
-		Rectangle(getMemDC(), bossCannon4.left, bossCannon4.top, bossCannon4.right, bossCannon4.bottom);
-		Rectangle(getMemDC(), bossCannon5.left, bossCannon5.top, bossCannon5.right, bossCannon5.bottom);
-		Rectangle(getMemDC(), bossCannon6.left, bossCannon6.top, bossCannon6.right, bossCannon6.bottom);
-		Rectangle(getMemDC(), bossCannon7.left, bossCannon7.top, bossCannon7.right, bossCannon7.bottom);
-		Rectangle(getMemDC(), bossCannon8.left, bossCannon8.top, bossCannon8.right, bossCannon8.bottom);
-	}
+	//
+	//if (KEYMANAGER->isToggleKey(VK_TAB))
+	//{
+	//	Rectangle(getMemDC(), bossCannon1.left, bossCannon1.top, bossCannon1.right, bossCannon1.bottom);
+	//	Rectangle(getMemDC(), bossCannon2.left, bossCannon2.top, bossCannon2.right, bossCannon2.bottom);
+	//	Rectangle(getMemDC(), bossCannon3.left, bossCannon3.top, bossCannon3.right, bossCannon3.bottom);
+	//	Rectangle(getMemDC(), bossCannon4.left, bossCannon4.top, bossCannon4.right, bossCannon4.bottom);
+	//	Rectangle(getMemDC(), bossCannon5.left, bossCannon5.top, bossCannon5.right, bossCannon5.bottom);
+	//	Rectangle(getMemDC(), bossCannon6.left, bossCannon6.top, bossCannon6.right, bossCannon6.bottom);
+	//	Rectangle(getMemDC(), bossCannon7.left, bossCannon7.top, bossCannon7.right, bossCannon7.bottom);
+	//	Rectangle(getMemDC(), bossCannon8.left, bossCannon8.top, bossCannon8.right, bossCannon8.bottom);
+	//}
 
 	bossCannonImage->alphaRender(getMemDC(), bossCannon1.left, bossCannon1.top, alphaValue1);
 	bossCannonImage->alphaRender(getMemDC(), bossCannon2.left, bossCannon2.top, alphaValue2);
@@ -1270,29 +1345,29 @@ void enemyManager::setBoss()
 	m_Boss->init("remilia", PointMake(150 , -200));
 	m_vBoss.push_back(m_Boss);
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon1 = RectMakeCenter(325, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon1 = RectMakeCenter(325, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon2 = RectMakeCenter(225, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon2 = RectMakeCenter(225, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon3 = RectMakeCenter(225, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
-	
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon4 = RectMakeCenter(325, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon3 = RectMakeCenter(225, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon4 = RectMakeCenter(325, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon5 = RectMakeCenter(525, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon5 = RectMakeCenter(525, 575, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon6 = RectMakeCenter(625, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon6 = RectMakeCenter(625, 475, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon7 = RectMakeCenter(625, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon7 = RectMakeCenter(625, 275, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
-	bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
-	bossCannon8 = RectMakeCenter(525, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
+	//bossCannonImage = IMAGEMANAGER->findImage("bulletCanon");
+	//bossCannon8 = RectMakeCenter(525, 175, bossCannonImage->getWidth(), bossCannonImage->getHeight());
 
 }
 
@@ -1662,9 +1737,6 @@ void enemyManager::bossBulletFire(int pattern)
 	}
 }
 
-void enemyManager::deleteBoss(int num)
-{
-}
 
 void enemyManager::bossPatternRain(int countNum)
 {

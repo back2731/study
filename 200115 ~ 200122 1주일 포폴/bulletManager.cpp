@@ -50,6 +50,257 @@ void bulletManager::render()
 {
 }
 
+
+void bulletManager::itemSet(int itemNum, float x, float y, float angle, float itemSpeed, int interval)
+{
+	switch (itemNum)
+	{
+		case SCORE:		
+		{
+			scoreItem = OBJECTPOOL->getItem();
+			scoreItemCannon.center.x = x;
+			scoreItemCannon.center.y = y;
+			scoreItemCannon.angle = angle;
+
+			scoreItem.itemImage = IMAGEMANAGER->findImage("scoreItem");
+			scoreItem.speed = itemSpeed;
+			scoreItem.angle = scoreItemCannon.angle;
+
+			if (scoreItemAddSpeed % interval == 0)	
+			{
+				scoreItem.x = scoreItemCannon.center.x;
+				scoreItem.y = scoreItemCannon.center.y;
+				scoreItem.rc = RectMakeCenter(scoreItem.x,
+					scoreItem.y,
+					scoreItem.itemImage->getWidth(),
+					scoreItem.itemImage->getHeight());
+			}
+			vScoreItem.push_back(scoreItem);
+
+			scoreItemCannon.cannonEnd.x = cosf(scoreItemCannon.angle) * scoreItemCannon.cannon + scoreItemCannon.center.x;
+			scoreItemCannon.cannonEnd.y = -sinf(scoreItemCannon.angle) * scoreItemCannon.cannon + scoreItemCannon.center.y;
+		}
+		break;
+		case POWER:
+		{
+			powerItem = OBJECTPOOL->getItem();
+			powerItemCannon.center.x = x;
+			powerItemCannon.center.y = y;
+			powerItemCannon.angle = angle;
+
+			powerItem.itemImage = IMAGEMANAGER->findImage("powerItem");
+			powerItem.speed = itemSpeed;
+			powerItem.angle = powerItemCannon.angle;
+
+			if (powerItemAddSpeed % interval == 0)
+			{
+				powerItem.x = powerItemCannon.center.x;
+				powerItem.y = powerItemCannon.center.y;
+				powerItem.rc = RectMakeCenter(powerItem.x, powerItem.y,	powerItem.itemImage->getWidth(), powerItem.itemImage->getHeight());
+			}
+			vPowerItem.push_back(powerItem);
+
+			powerItemCannon.cannonEnd.x = cosf(powerItemCannon.angle) * powerItemCannon.cannon + powerItemCannon.center.x;
+			powerItemCannon.cannonEnd.y = -sinf(powerItemCannon.angle) * powerItemCannon.cannon + powerItemCannon.center.y;
+		}
+		break;
+		case LIFE:
+		{
+			lifeItem = OBJECTPOOL->getItem();
+			lifeItemCannon.center.x = x;
+			lifeItemCannon.center.y = y;
+			lifeItemCannon.angle = angle;
+
+			lifeItem.itemImage = IMAGEMANAGER->findImage("playerLifeItem");
+			lifeItem.speed = itemSpeed;
+			lifeItem.angle = lifeItemCannon.angle;
+
+			if (powerItemAddSpeed % interval == 0)
+			{
+				lifeItem.x = lifeItemCannon.center.x;
+				lifeItem.y = lifeItemCannon.center.y;
+				lifeItem.rc = RectMakeCenter(lifeItem.x, lifeItem.y, lifeItem.itemImage->getWidth(), lifeItem.itemImage->getHeight());
+			}
+			vLifeItem.push_back(lifeItem);
+
+			lifeItemCannon.cannonEnd.x = cosf(lifeItemCannon.angle) * lifeItemCannon.cannon + lifeItemCannon.center.x;
+			lifeItemCannon.cannonEnd.y = -sinf(lifeItemCannon.angle) * lifeItemCannon.cannon + lifeItemCannon.center.y;
+		}
+		break;
+	}
+}
+
+void bulletManager::itemMove(int itemNum)
+{
+	switch (itemNum)
+	{
+		case SCORE:	
+		{
+			scoreItemAddSpeed++;
+
+			viScoreItem = vScoreItem.begin();
+			for (viScoreItem; viScoreItem != vScoreItem.end();)
+			{
+				viScoreItem->x += cosf(viScoreItem->angle) * viScoreItem->speed;
+				viScoreItem->y += -sinf(viScoreItem->angle) * viScoreItem->speed;
+
+				viScoreItem->rc = RectMakeCenter(viScoreItem->x,
+					viScoreItem->y, viScoreItem->itemImage->getWidth(),
+					viScoreItem->itemImage->getHeight());
+
+				if (100 >= viScoreItem->rc.right || WINSIZEY <= viScoreItem->rc.top ||
+					WINSIZEX - 300 <= viScoreItem->rc.left || 50 > viScoreItem->rc.bottom)
+				{
+					scoreItem = { 0, };
+					OBJECTPOOL->setItemVector(scoreItem);
+					viScoreItem = vScoreItem.erase(viScoreItem);
+				}
+				else ++viScoreItem;
+			}
+		}
+		break;
+		case POWER:
+		{
+			powerItemAddSpeed++;
+
+			viPowerItem = vPowerItem.begin();
+			for (viPowerItem; viPowerItem != vPowerItem.end();)
+			{
+				viPowerItem->x += cosf(viPowerItem->angle) * viPowerItem->speed;
+				viPowerItem->y += -sinf(viPowerItem->angle) * viPowerItem->speed;
+
+				viPowerItem->rc = RectMakeCenter(viPowerItem->x,
+					viPowerItem->y, viPowerItem->itemImage->getWidth(),
+					viPowerItem->itemImage->getHeight());
+
+				if (100 >= viPowerItem->rc.right || WINSIZEY <= viPowerItem->rc.top ||
+					WINSIZEX - 300 <= viPowerItem->rc.left || 50 > viPowerItem->rc.bottom)
+				{
+					powerItem = { 0, };
+					OBJECTPOOL->setItemVector(powerItem);
+					viPowerItem = vPowerItem.erase(viPowerItem);
+				}
+				else ++viPowerItem;
+			}
+		}
+		break;
+		case LIFE:
+		{
+			powerItemAddSpeed++;
+
+			viLifeItem = vLifeItem.begin();
+			for (viLifeItem; viLifeItem != vLifeItem.end();)
+			{
+				viLifeItem->x += cosf(viLifeItem->angle) * viLifeItem->speed;
+				viLifeItem->y += -sinf(viLifeItem->angle) * viLifeItem->speed;
+
+				viLifeItem->rc = RectMakeCenter(viLifeItem->x,
+					viLifeItem->y, viLifeItem->itemImage->getWidth(),
+					viLifeItem->itemImage->getHeight());
+
+				if (100 >= viLifeItem->rc.right || WINSIZEY <= viLifeItem->rc.top ||
+					WINSIZEX - 300 <= viLifeItem->rc.left || 50 > viLifeItem->rc.bottom)
+				{
+					lifeItem = { 0, };
+					OBJECTPOOL->setItemVector(lifeItem);
+					viLifeItem = vLifeItem.erase(viLifeItem);
+				}
+				else ++viLifeItem;
+			}
+		}
+		break;
+	}
+}
+
+void bulletManager::itemRender(int itemNum)
+{
+	switch (itemNum)
+	{
+	case SCORE:
+	{
+		for (viScoreItem = vScoreItem.begin(); viScoreItem != vScoreItem.end(); ++viScoreItem)
+		{
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+			{
+				Rectangle(getMemDC(), viScoreItem->rc.left, viScoreItem->rc.top, viScoreItem->rc.right, viScoreItem->rc.bottom);
+			}
+
+			viScoreItem->itemImage->render(getMemDC(), viScoreItem->rc.left, viScoreItem->rc.top);
+		}
+	}
+	break;
+	case POWER:
+	{
+		for (viPowerItem = vPowerItem.begin(); viPowerItem != vPowerItem.end(); ++viPowerItem)
+		{
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+			{
+				Rectangle(getMemDC(), viPowerItem->rc.left, viPowerItem->rc.top, viPowerItem->rc.right, viPowerItem->rc.bottom);
+			}
+
+			viPowerItem->itemImage->render(getMemDC(), viPowerItem->rc.left, viPowerItem->rc.top);
+		}
+	}
+	break;
+	case LIFE:
+	{
+		for (viLifeItem = vLifeItem.begin(); viLifeItem != vLifeItem.end(); ++viLifeItem)
+		{
+			if (KEYMANAGER->isToggleKey(VK_TAB))
+			{
+				Rectangle(getMemDC(), viLifeItem->rc.left, viLifeItem->rc.top, viLifeItem->rc.right, viLifeItem->rc.bottom);
+			}
+
+			viLifeItem->itemImage->render(getMemDC(), viLifeItem->rc.left, viLifeItem->rc.top);
+		}
+	}
+	break;
+	}
+}
+
+void bulletManager::itemCollision()
+{
+	for (int i = 0; i < vScoreItem.size(); i++)
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &vScoreItem[i].rc, &PLAYER->getPlayerItemRect()))
+		{
+			scoreItem = { 0, };
+			OBJECTPOOL->setItemVector(scoreItem);
+			vScoreItem.erase(vScoreItem.begin() + i);
+			PLAYER->setScore(PLAYER->getScore() + SCOREITEM);
+			// 플레이어 히트
+			break;
+		}
+	}
+	for (int i = 0; i < vPowerItem.size(); i++)
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &vPowerItem[i].rc, &PLAYER->getPlayerItemRect()))
+		{
+			powerItem = { 0, };
+			OBJECTPOOL->setItemVector(powerItem);
+			vPowerItem.erase(vPowerItem.begin() + i);
+			PLAYER->setPower(PLAYER->getPower() + POWERITEM);
+			// 플레이어 히트
+			break;
+		}
+	}
+	for (int i = 0; i < vLifeItem.size(); i++)
+	{
+		RECT rc;
+		if (IntersectRect(&rc, &vLifeItem[i].rc, &PLAYER->getPlayerItemRect()))
+		{
+			lifeItem = { 0, };
+			OBJECTPOOL->setItemVector(lifeItem);
+			vLifeItem.erase(vLifeItem.begin() + i);
+			PLAYER->setLife(PLAYER->getLife() + LIFEITEM);
+			// 플레이어 히트
+			break;
+		}
+	}
+}
+
 void bulletManager::playerCommonBulletFire(float x, float y)
 {
 	playerCommonBullet = OBJECTPOOL->getBullet();
@@ -330,8 +581,8 @@ void bulletManager::playerHomingBulletMove()
 	}
 	else if (ENEMYMANAGER->getVBoss().size() > 0)
 	{
-		if (ENEMYMANAGER->getVBoss()[0]->getBossX() >= 0 && ENEMYMANAGER->getVBoss()[0]->getBossX() <= WINSIZEX &&
-			ENEMYMANAGER->getVBoss()[0]->getBossY() >= 0 && ENEMYMANAGER->getVBoss()[0]->getBossY() <= WINSIZEX)
+		if (ENEMYMANAGER->getVBoss()[0]->getRect().right >= 100 && ENEMYMANAGER->getVBoss()[0]->getRect().left <= 900 &&
+			ENEMYMANAGER->getVBoss()[0]->getRect().bottom >= 0 && ENEMYMANAGER->getVBoss()[0]->getRect().top <= WINSIZEY)
 
 		{
 			for (viPlayerHomingBullet = vPlayerHomingBullet.begin(); viPlayerHomingBullet != vPlayerHomingBullet.end();)
@@ -443,7 +694,15 @@ void bulletManager::playerCommonBulletRedMinionCollision()
 					playerCommonBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
-					ENEMYMANAGER->deleteRedEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVRedMinion()[j]->setHp(ENEMYMANAGER->getVRedMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVRedMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteRedEnemy(j);
+					}
 					break;
 				}
 			}
@@ -466,7 +725,15 @@ void bulletManager::playerCommonBulletBlueMinionCollision()
 					playerCommonBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
-					ENEMYMANAGER->deleteBlueEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVBlueMinion()[j]->setHp(ENEMYMANAGER->getVBlueMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVBlueMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteBlueEnemy(j);
+					}
 					break;
 				}
 			}
@@ -489,7 +756,15 @@ void bulletManager::playerCommonBulletGreenMinionCollision()
 					playerCommonBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
-					ENEMYMANAGER->deleteGreenEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVGreenMinion()[j]->setHp(ENEMYMANAGER->getVGreenMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVGreenMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteGreenEnemy(j);
+					}	
 					break;
 				}
 			}
@@ -512,7 +787,15 @@ void bulletManager::playerCommonBulletYellowMinionCollision()
 					playerCommonBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
-					ENEMYMANAGER->deleteYellowEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVYellowMinion()[j]->setHp(ENEMYMANAGER->getVYellowMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVYellowMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteYellowEnemy(j);
+					}	
 					break;
 				}
 			}
@@ -535,7 +818,15 @@ void bulletManager::playerCommonBulletBossCollision()
 					playerCommonBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerCommonBullet);
 					vPlayerCommonBullet.erase(vPlayerCommonBullet.begin() + i);
-					//ENEMYMANAGER->deleteYellowEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + BOSSPOINT);
+
+					ENEMYMANAGER->getVBoss()[j]->setHp(ENEMYMANAGER->getVBoss()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVBoss()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->getVBoss()[j]->setHp(0);
+					}
 					break;
 				}
 			}
@@ -558,7 +849,15 @@ void bulletManager::playerHomingBulletRedMinionCollision()
 					playerHomingBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerHomingBullet);
 					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
-					ENEMYMANAGER->deleteRedEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVRedMinion()[j]->setHp(ENEMYMANAGER->getVRedMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVRedMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteRedEnemy(j);
+					}
 					break;
 				}
 			}
@@ -581,7 +880,15 @@ void bulletManager::playerHomingBulletBlueMinionCollision()
 					playerHomingBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerHomingBullet);
 					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
-					ENEMYMANAGER->deleteBlueEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVBlueMinion()[j]->setHp(ENEMYMANAGER->getVBlueMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVBlueMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteBlueEnemy(j);
+					}					
 					break;
 				}
 			}
@@ -604,7 +911,15 @@ void bulletManager::playerHomingBulletGreenMinionCollision()
 					playerHomingBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerHomingBullet);
 					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
-					ENEMYMANAGER->deleteGreenEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVGreenMinion()[j]->setHp(ENEMYMANAGER->getVGreenMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVGreenMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteGreenEnemy(j);
+					}	
 					break;
 				}
 			}
@@ -627,7 +942,15 @@ void bulletManager::playerHomingBulletYellowMinionCollision()
 					playerHomingBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerHomingBullet);
 					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
-					ENEMYMANAGER->deleteYellowEnemy(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + ENEMYPOINT);
+
+					ENEMYMANAGER->getVYellowMinion()[j]->setHp(ENEMYMANAGER->getVYellowMinion()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVYellowMinion()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->deleteYellowEnemy(j);
+					}
 					break;
 				}
 			}
@@ -650,7 +973,15 @@ void bulletManager::playerHomingBulletBossCollision()
 					playerHomingBullet = { 0, };
 					OBJECTPOOL->setBulletVector(playerHomingBullet);
 					vPlayerHomingBullet.erase(vPlayerHomingBullet.begin() + i);
-					//ENEMYMANAGER->deleteBoss(j);
+
+					// 충돌시 점수
+					PLAYER->setScore(PLAYER->getScore() + BOSSPOINT);
+
+					ENEMYMANAGER->getVBoss()[j]->setHp(ENEMYMANAGER->getVBoss()[j]->getHp() - 1);
+					if (ENEMYMANAGER->getVBoss()[j]->getHp() <= 0)
+					{
+						ENEMYMANAGER->getVBoss()[j]->setHp(0);
+					}
 					break;
 				}
 			}
@@ -1462,6 +1793,7 @@ void bulletManager::redBulletPlayerCollision()
 				vCommonRedBullet.erase(vCommonRedBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1479,6 +1811,7 @@ void bulletManager::redBulletPlayerCollision()
 				vSpinRedBullet.erase(vSpinRedBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1496,6 +1829,7 @@ void bulletManager::redBulletPlayerCollision()
 				vHomingRedBullet.erase(vHomingRedBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1517,6 +1851,7 @@ void bulletManager::blueBulletPlayerCollision()
 				vCommonBlueBullet.erase(vCommonBlueBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1534,6 +1869,7 @@ void bulletManager::blueBulletPlayerCollision()
 				vSpinBlueBullet.erase(vSpinBlueBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1551,6 +1887,7 @@ void bulletManager::blueBulletPlayerCollision()
 				vHomingBlueBullet.erase(vHomingBlueBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1572,6 +1909,7 @@ void bulletManager::greenBulletPlayerCollision()
 				vCommonGreenBullet.erase(vCommonGreenBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1589,6 +1927,7 @@ void bulletManager::greenBulletPlayerCollision()
 				vSpinGreenBullet.erase(vSpinGreenBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1610,6 +1949,7 @@ void bulletManager::yellowBulletPlayerCollision()
 				vCommonYellowBullet.erase(vCommonYellowBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1627,6 +1967,7 @@ void bulletManager::yellowBulletPlayerCollision()
 				vSpinYellowBullet.erase(vSpinYellowBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1648,6 +1989,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossVerticalBullet.erase(vBossVerticalBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1665,6 +2007,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossHorizontalBullet.erase(vBossHorizontalBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1682,6 +2025,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossRightSpinBullet.erase(vBossRightSpinBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1699,6 +2043,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossLeftSpinBullet.erase(vBossLeftSpinBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1716,6 +2061,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossCommonBullet.erase(vBossCommonBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}
@@ -1733,6 +2079,7 @@ void bulletManager::bossBulletPlayerCollision()
 				vBossHomingBullet.erase(vBossHomingBullet.begin() + i);
 				// 플레이어 히트
 				collisionCheckNum++;
+				PLAYER->setLife(PLAYER->getLife() - 1);
 				break;
 			}
 		}

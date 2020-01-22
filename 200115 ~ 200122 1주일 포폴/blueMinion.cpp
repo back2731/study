@@ -14,6 +14,7 @@ HRESULT blueMinion::init(const char * imageName, POINT position)
 	enemyImage = IMAGEMANAGER->findImage(imageName);
 	enemyRect = RectMakeCenter(position.x, position.y, enemyImage->getFrameWidth(), enemyImage->getFrameHeight());
 
+	hp = 5;
 
 	count = 0;
 	return S_OK;

@@ -12,6 +12,8 @@ protected:
 	int		currentFrameY;
 	int		count;
 
+	int		hp;
+
 public:
 	enemyBase();
 	~enemyBase();
@@ -30,6 +32,9 @@ public:
 	RECT getRect() { return enemyRect; }
 	float getRectX() { return (enemyRect.left + (enemyRect.right - enemyRect.left) / 2); }
 	float getRectY() { return (enemyRect.top + (enemyRect.bottom - enemyRect.top) / 2); }
+	
+	int getHp() { return hp; }
+	void setHp(int num) { hp = num; }
 
 };
 

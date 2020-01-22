@@ -16,6 +16,8 @@ HRESULT boss::init(const char * imageName, POINT position)
 	enemyImage = IMAGEMANAGER->findImage(imageName);
 	enemyRect = RectMakeCenter(position.x, position.y, enemyImage->getFrameWidth(), enemyImage->getFrameHeight());
 
+	hp = 1000;
+
 	count = 0;
 	return S_OK;
 }

@@ -4,8 +4,15 @@
 #include "enemyManager.h"
 #include "player.h"	
 
-#define PLAYERHIT	30
+#define PLAYERHIT	10
 #define ENEMYHIT	80
+
+#define ENEMYPOINT	3
+#define BOSSPOINT	20
+
+#define SCOREITEM	500
+#define POWERITEM	5
+#define LIFEITEM	5
 
 enum bulletCase
 {
@@ -13,6 +20,12 @@ enum bulletCase
 	MINION_BLUEBULLET, 
 	MINION_GREENBULLET, 
 	MINION_YELLOWBULLET,
+};
+enum itemKind
+{
+	SCORE,
+	POWER,
+	LIFE
 };
 struct tagCannon
 {
@@ -24,6 +37,24 @@ struct tagCannon
 class bulletManager : public gameNode, public singletonBase<bulletManager>
 {
 private:
+
+	vector<ItemInfo> vScoreItem;
+	vector<ItemInfo>::iterator viScoreItem;
+	ItemInfo scoreItem;
+	tagCannon scoreItemCannon;
+	int scoreItemAddSpeed;
+
+	vector<ItemInfo> vPowerItem;
+	vector<ItemInfo>::iterator viPowerItem;
+	ItemInfo powerItem;
+	tagCannon powerItemCannon;
+	int powerItemAddSpeed;
+
+	vector<ItemInfo> vLifeItem;
+	vector<ItemInfo>::iterator viLifeItem;
+	ItemInfo lifeItem;
+	tagCannon lifeItemCannon;
+	int lifeItemAddSpeed;
 
 	// 플레이어 통상 불릿
 	vector<bulletInfo> vPlayerCommonBullet;
@@ -162,6 +193,15 @@ public:
 
 	int collisionCheck() { return collisionCheckNum; }
 
+	vector<bulletInfo> getPlayerCommonBulletVector() { return vPlayerCommonBullet; }
+
+	//
+	void itemSet(int itemNum, float x, float y, float angle, float itemSpeed, int interval);
+	void itemMove(int itemNum);
+	void itemRender(int itemNum);
+
+	void itemCollision();
+
 	// 플레이어 통상 총알
 	void playerCommonBulletFire(float x, float y);
 	void playerCommonBulletMove();
@@ -188,7 +228,7 @@ public:
 
 	// 미니언 통상 총알
 	void minionCommonBulletFire(int bulletNum, string bulletKind, float x, float y, float angle, float bulletSpeed, int interval);
-	void minionCommonBulletMove(int bulletNum);
+	void minionCommonBulletMove(int itemNum);
 	void minionCommonBulletRender(int bulletNum);
 
 	// 미니언 회전 총알

@@ -31,5 +31,6 @@ public:
 	float getBlueMinionY() { return rectY; }
 
 	RECT getRect() { return enemyRect; }
+
 };
 

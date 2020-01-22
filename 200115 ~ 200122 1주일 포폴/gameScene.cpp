@@ -13,9 +13,19 @@ gameScene::~gameScene()
 
 HRESULT gameScene::init()
 {
+	// player
 	IMAGEMANAGER->addImage("playerCommonBullet", "images/PlayerNormalBullet.bmp", 30, 64, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("playerHomingBullet", "images/playerHomingBullet.bmp", 13, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("playerHitImage", "images/playerHitImage.bmp", 12, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("playerCannon", "images/playerCannon.bmp", 15, 15, true, RGB(255, 0, 255));
 
+	IMAGEMANAGER->addFrameImage("score", "images/score.bmp", 180, 18, 10, 1, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addImage("UIplayer", "images/UIplayer.bmp", 53, 19, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("UIHP", "images/UIHP.bmp", 25, 17, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("UIPower", "images/UIPower.bmp", 53, 19, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("UIScore", "images/UIScore.bmp", 49, 19, true, RGB(255, 0, 255));
+	
 	// enemys
 	IMAGEMANAGER->addFrameImage("redEnemy", "images/redEnemy.bmp", 1320 / 2, 200 / 2, 12, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("greenEnemy", "images/greenEnemy.bmp", 1320 / 2, 200 / 2, 12, 2, true, RGB(255, 0, 255));
@@ -68,8 +78,6 @@ HRESULT gameScene::init()
 	IMAGEMANAGER->addImage("graySmallBullet", "images/graySmallBullet.bmp", 8, 8, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("whiteSmallBullet", "images/whiteSmallBullet.bmp", 8, 8, true, RGB(255, 0, 255));
 
-	//
-
 	//BOSS
 
 	IMAGEMANAGER->addFrameImage("remilia", "images/remilia.bmp", 4351, 1134, 19, 7, true, RGB(255, 0, 255));
@@ -87,7 +95,12 @@ HRESULT gameScene::init()
 	IMAGEMANAGER->addImage("spbulletSmall2", "images/spbulletSmall2.bmp", 32, 32, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addImage("bulletCanon", "images/bulletCanon.bmp", 128, 128, true, RGB(0, 0, 0));
 
-	//
+	// Item
+
+	IMAGEMANAGER->addImage("powerItem", "images/powerItem.bmp", 16, 16, true, RGB(0, 0, 0));
+	IMAGEMANAGER->addImage("scoreItem", "images/scoreItem.bmp", 16, 16, true, RGB(0, 0, 0));
+	IMAGEMANAGER->addImage("playerLifeItem", "images/playerLifeItem.bmp", 16, 16, true, RGB(0, 0, 0));
+
 
 
 	IMAGEMANAGER->addImage("UIConsole", "images/UIConsole.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
@@ -137,12 +150,6 @@ void gameScene::update()
 			bossBG++;
 		}
 	}
-
-	if (KEYMANAGER->isOnceKeyDown('1'))
-	{
-		//¾ÀÃ¼ÀÎÁö
-		SCENEMANAGER->changeScene("introScene");
-	}	
 }
 
 void gameScene::render()
@@ -150,8 +157,9 @@ void gameScene::render()
 	//IMAGEMANAGER->loopRender("stageBG", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), loopX, loopY);
 	IMAGEMANAGER->loopAlphaRender("bossBackGround", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), 0, 0, bossBG);
 	IMAGEMANAGER->loopAlphaRender("stageBG", getMemDC(), &RectMake(0, 0, WINSIZEX, WINSIZEY), loopX, loopY, stageBG);
-	ENEMYMANAGER->render();
 	PLAYER->render();
+	ENEMYMANAGER->render();
 	IMAGEMANAGER->render("UIConsole", getMemDC());
 	OBJECTPOOL->render(getMemDC());
+	PLAYER->scoreRender();
 }
