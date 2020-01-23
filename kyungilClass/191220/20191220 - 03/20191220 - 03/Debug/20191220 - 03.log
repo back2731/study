@@ -1,0 +1,4 @@
+﻿  mainGame.cpp
+c:\users\kga_2\source\repos\수업\191220\20191220 - 03\20191220 - 03\maingame.cpp(17): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\kga_2\source\repos\수업\191220\20191220 - 03\20191220 - 03\maingame.cpp(36): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  20191220 - 03.vcxproj -> C:\Users\KGA_2\source\repos\수업\191220\20191220 - 03\Debug\20191220 - 03.exe

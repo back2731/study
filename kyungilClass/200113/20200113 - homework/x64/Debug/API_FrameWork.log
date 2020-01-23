@@ -1,0 +1,8 @@
+﻿  enemyManager.cpp
+c:\users\kga_13\desktop\수업\수업\200113\20200113 - homework\enemymanager.cpp(75): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\kga_13\desktop\수업\수업\200113\20200113 - homework\enemymanager.cpp(75): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mainGame.cpp
+  winMain.cpp
+c:\users\kga_13\desktop\수업\수업\200113\20200113 - homework\winmain.cpp(128): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200113\20200113 - homework\x64\Debug\20200113 - 01.exe

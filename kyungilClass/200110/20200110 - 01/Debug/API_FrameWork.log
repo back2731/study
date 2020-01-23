@@ -1,0 +1,4 @@
+﻿  bullet.cpp
+c:\users\kga_13\desktop\수업\수업\200110\20200110 - 01\bullet.cpp(63): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200110\20200110 - 01\bullet.cpp(79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200110\20200110 - 01\Debug\20200110 - 01.exe

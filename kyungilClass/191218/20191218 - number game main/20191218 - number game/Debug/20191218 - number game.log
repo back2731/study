@@ -1,0 +1,5 @@
+﻿  block.cpp
+c:\users\kga_2\source\repos\수업\191218\20191218 - number game main\20191218 - number game\block.cpp(145): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  main.cpp
+  코드를 생성하고 있습니다...
+  20191218 - number game.vcxproj -> C:\Users\KGA_2\source\repos\수업\191218\20191218 - number game main\Debug\20191218 - number game.exe

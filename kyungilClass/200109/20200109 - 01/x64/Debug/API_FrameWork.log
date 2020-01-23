@@ -1,0 +1,4 @@
+﻿  minimap.cpp
+c:\users\kga_13\desktop\수업\수업\200109\20200109 - 01\minimap.cpp(20): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200109\20200109 - 01\minimap.cpp(44): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200109\20200109 - 01\x64\Debug\20200109 - 01.exe

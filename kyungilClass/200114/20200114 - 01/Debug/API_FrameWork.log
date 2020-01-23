@@ -1,0 +1,11 @@
+﻿  enemyManager.cpp
+c:\users\kga_13\desktop\수업\수업\200114\20200114 - 01\enemymanager.cpp(77): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+c:\users\kga_13\desktop\수업\수업\200114\20200114 - 01\enemymanager.cpp(77): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mainGame.cpp
+  rocket.cpp
+c:\users\kga_13\desktop\수업\수업\200114\20200114 - 01\rocket.cpp(116): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200114\20200114 - 01\rocket.cpp(117): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200114\20200114 - 01\rocket.cpp(124): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  winMain.cpp
+  코드를 생성하고 있습니다...
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200114\20200114 - 01\Debug\20200114 - 01.exe

@@ -1,0 +1,3 @@
+﻿  main.cpp
+c:\users\kga_7\source\repos\20191206_h\20191206_h\main.cpp(5): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+  20191206_h.vcxproj -> C:\Users\KGA_7\source\repos\20191206_h\Debug\20191206_h.exe

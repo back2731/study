@@ -1,0 +1,27 @@
+﻿  stdafx.cpp
+  gameNode.cpp
+  keyManager.cpp
+  mainGame.cpp
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(19): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(39): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(40): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(57): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(63): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(74): warning C4129: ' ': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(75): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(100): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(106): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(111): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(116): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(149): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(151): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(153): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(155): warning C4244: '인수': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\maingame.cpp(168): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Utils.cpp
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\utils.cpp(26): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+  winMain.cpp
+c:\users\kga_13\desktop\수업\수업\200106\20200106 - homework\winmain.cpp(122): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200106\20200106 - homework\x64\Debug\20200106 - homework.exe

@@ -1,0 +1,3 @@
+﻿  main.cpp
+c:\users\kga_2\source\repos\수업\191226\20191226 - apple\20191226 - apple\main.cpp(134): warning C4101: 'x' :참조되지 않은 지역 변수입니다.
+LINK : fatal error LNK1168: C:\Users\KGA_2\source\repos\수업\191226\20191226 - APPLE\Debug\20191226 - APPLE.exe을(를) 쓰기용으로 열 수 없습니다.

@@ -1,0 +1,26 @@
+﻿  mainGame.cpp
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\image.h(132): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(84): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(101): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(102): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(105): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(106): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(112): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(113): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(117): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(118): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(137): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(138): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(144): warning C4305: '-=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(171): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(172): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(173): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(180): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(213): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(218): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(220): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(230): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(232): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(234): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\kga_13\desktop\수업\수업\200108\20200108 - homework\maingame.cpp(239): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  API_FrameWork.vcxproj -> C:\Users\KGA_13\Desktop\수업\수업\200108\20200108 - homework\x64\Debug\20200108 - homework.exe
