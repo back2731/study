@@ -21,14 +21,22 @@ HRESULT soundTest::init()
 
 	for (int i = 0; i < MUSICMAX; i++)
 	{
-		musicBox[i] = RectMake(200 , 100 + i * 30, 200, 20);
+		musicBox[i] = RectMake(0, 50 + i * 30, 400, 20);
 	}
+
+	play = RectMakeCenter(WINSIZEX / 2, WINSIZEY - 100, 50, 50);
+	stop = RectMakeCenter(WINSIZEX / 2, WINSIZEY - 100, 50, 50);;
+	pause = RectMakeCenter(WINSIZEX / 2, WINSIZEY - 100, 50, 50);;
+	beforeMusic = RectMakeCenter(WINSIZEX / 2 - 100, WINSIZEY - 100, 50, 50);
+	nextMusic = RectMakeCenter(WINSIZEX / 2 + 100, WINSIZEY - 100, 50, 50);
+	Mute;
 
 	musicName[0] = "snow_flower";
 	musicName[1] = "Ã¼¸®";
 	musicName[2] = "A";
 	musicName[3] = "B";
 	musicName[4] = "C";
+
 	
 	return S_OK;
 }
@@ -63,13 +71,20 @@ void soundTest::render()
 	{
 		Rectangle(getMemDC(), musicBox[i].left, musicBox[i].top, musicBox[i].right, musicBox[i].bottom);
 	}
+		Rectangle(getMemDC(), play.left, play.top, play.right, play.bottom);
+		Rectangle(getMemDC(), beforeMusic.left, beforeMusic.top, beforeMusic.right, beforeMusic.bottom);
+		Rectangle(getMemDC(), nextMusic.left, nextMusic.top, nextMusic.right, nextMusic.bottom);
+		Rectangle(getMemDC(), play.left, play.top, play.right, play.bottom);
 }
 
 void soundTest::ChoiceMusic(string name, float volum)
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	if (PtInRect(&play, m_ptMouse))
 	{
-		SOUNDMANAGER->play(name, volum);
+		if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+		{
+			SOUNDMANAGER->play(name, volum);
+		}
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
 	{

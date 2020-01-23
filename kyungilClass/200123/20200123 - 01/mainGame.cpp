@@ -16,7 +16,6 @@ HRESULT mainGame::init()
 
 	SCENEMANAGER->changeScene("sound");
 	
-
 	return S_OK;
 }
 
@@ -39,7 +38,7 @@ void mainGame::render(/*HDC hdc*/)
 	PatBlt(getMemDC(), 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//===================================================
 	SCENEMANAGER->render();
-	TIMEMANAGER->render(getMemDC());
+	//TIMEMANAGER->render(getMemDC());
 	//=================================================
 	//백버퍼의 내용을 HDC에 그린다.(건드리지말것.)
 	this->getBackBuffer()->render(getHDC(), 0, 0);

@@ -13,6 +13,14 @@ private:
 	RECT musicBox[MUSICBOX];
 	string musicName[5];
 
+	RECT play;
+	RECT stop;
+	RECT pause;
+	RECT beforeMusic;
+	RECT nextMusic;
+	RECT Mute;
+
+
 public:
 	soundTest();
 	~soundTest();
