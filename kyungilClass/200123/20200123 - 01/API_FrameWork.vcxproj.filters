@@ -37,9 +37,6 @@
     <Filter Include="프로그래스바">
       <UniqueIdentifier>{dae6b3b8-16b1-4a62-aec4-1313566bf949}</UniqueIdentifier>
     </Filter>
-    <Filter Include="텍스트데이터">
-      <UniqueIdentifier>{00ade87a-93a8-46f2-b42b-4e1b20260dd6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="mainGame\testScene">
       <UniqueIdentifier>{23a25639-8ac7-481e-aa11-d9e006b7ae5b}</UniqueIdentifier>
     </Filter>
@@ -93,9 +90,6 @@
     <ClInclude Include="progressBar.h">
       <Filter>프로그래스바</Filter>
     </ClInclude>
-    <ClInclude Include="txtData.h">
-      <Filter>텍스트데이터</Filter>
-    </ClInclude>
     <ClInclude Include="sceneManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -145,9 +139,6 @@
     </ClCompile>
     <ClCompile Include="progressBar.cpp">
       <Filter>프로그래스바</Filter>
-    </ClCompile>
-    <ClCompile Include="txtData.cpp">
-      <Filter>텍스트데이터</Filter>
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
       <Filter>Manager</Filter>
