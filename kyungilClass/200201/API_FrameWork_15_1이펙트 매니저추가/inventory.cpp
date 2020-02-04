@@ -128,58 +128,58 @@ void inventory::update()
 	}
 }
 
-void inventory::render()
+void inventory::render(HDC hdc)
 {
 	if (inventoryOpen)
 	{	
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{
-			Rectangle(getMemDC(), inventoryWindowRect.left, inventoryWindowRect.top, inventoryWindowRect.right, inventoryWindowRect.bottom);
+			Rectangle(hdc, inventoryWindowRect.left, inventoryWindowRect.top, inventoryWindowRect.right, inventoryWindowRect.bottom);
 			for (int i = 0; i < 6; i++)
 			{
 				for (int j = 0; j < 4; j++)
 				{
-					Rectangle(getMemDC(), inventorySlotRect[i * 4 + j].left, inventorySlotRect[i * 4 + j].top, inventorySlotRect[i * 4 + j].right, inventorySlotRect[i * 4 + j].bottom);
+					Rectangle(hdc, inventorySlotRect[i * 4 + j].left, inventorySlotRect[i * 4 + j].top, inventorySlotRect[i * 4 + j].right, inventorySlotRect[i * 4 + j].bottom);
 				}
 			}
 		}
-		inventoryWindowImage->render(getMemDC(), inventoryWindowRect.left, inventoryWindowRect.top);
+		inventoryWindowImage->render(hdc, inventoryWindowRect.left, inventoryWindowRect.top);
 
 		sprintf_s(str, "%d", playerGold);
-		TextOut(getMemDC(), inventoryWindowRect.left + 65, inventoryWindowRect.top + 335, str, strlen(str));
+		TextOut(hdc, inventoryWindowRect.left + 65, inventoryWindowRect.top + 335, str, strlen(str));
 
 
 		if (selectEquip)
 		{
-			equipmentSlotOnImage->render(getMemDC(), equipmentSlotOnRect.left, equipmentSlotOnRect.top);
-			consumptionSlotOffImage->render(getMemDC(), consumptionSlotOffRect.left, consumptionSlotOffRect.top);
+			equipmentSlotOnImage->render(hdc, equipmentSlotOnRect.left, equipmentSlotOnRect.top);
+			consumptionSlotOffImage->render(hdc, consumptionSlotOffRect.left, consumptionSlotOffRect.top);
 
 			for (int i = 0; i < vEquip.size(); i++)
 			{
-				vEquip[i].itemImage->render(getMemDC(), inventorySlotRect[i].left + 3, inventorySlotRect[i].top + 5);
+				vEquip[i].itemImage->render(hdc, inventorySlotRect[i].left + 3, inventorySlotRect[i].top + 5);
 			}
 			for (int i = 0; i < vEquip.size(); i++)
 			{
 				if (PtInRect(&inventorySlotRect[i], m_ptMouse))
 				{
-					vEquip[i].itemInfoImage->render(getMemDC(), m_ptMouse.x, m_ptMouse.y);
+					vEquip[i].itemInfoImage->render(hdc, m_ptMouse.x, m_ptMouse.y);
 				}
 			}
 		}
 		else if (selectConsumption)
 		{
-			consumptionSlotOnImage->render(getMemDC(), consumptionSlotOnRect.left, consumptionSlotOnRect.top);
-			equipmentSlotOffImage->render(getMemDC(), equipmentSlotOffRect.left, equipmentSlotOffRect.top);
+			consumptionSlotOnImage->render(hdc, consumptionSlotOnRect.left, consumptionSlotOnRect.top);
+			equipmentSlotOffImage->render(hdc, equipmentSlotOffRect.left, equipmentSlotOffRect.top);
 
 			for (int i = 0; i < vPotion.size(); i++)
 			{
-				vPotion[i].itemImage->render(getMemDC(), inventorySlotRect[i].left + 3, inventorySlotRect[i].top + 5);
+				vPotion[i].itemImage->render(hdc, inventorySlotRect[i].left + 3, inventorySlotRect[i].top + 5);
 			}
 			for (int i = 0; i < vPotion.size(); i++)
 			{
 				if (PtInRect(&inventorySlotRect[i], m_ptMouse))
 				{
-					vPotion[i].itemInfoImage->render(getMemDC(), m_ptMouse.x, m_ptMouse.y);
+					vPotion[i].itemInfoImage->render(hdc, m_ptMouse.x, m_ptMouse.y);
 				}
 			}
 		}

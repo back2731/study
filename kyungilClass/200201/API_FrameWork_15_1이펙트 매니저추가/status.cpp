@@ -22,6 +22,6 @@ void status::update()
 {
 }
 
-void status::render()
+void status::render(HDC hdc)
 {
 }

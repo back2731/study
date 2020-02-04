@@ -45,7 +45,7 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 	vector<tagItemInfo> getEquipVector() { return vEquip; }
 	vector<tagItemInfo> getPotionVector() { return vPotion; }

@@ -37,7 +37,7 @@ public:
 	HRESULT init();
 	void release();
 	void update();
-	void render();
+	void render(HDC hdc);
 
 	void setWeapon(tagItemInfo weaponVector) { vWeapon.push_back(weaponVector); }
 	tagItemInfo getWeapon() { return vWeapon[0]; }

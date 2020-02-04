@@ -55,33 +55,33 @@ void equipment::update()
 	}
 }
 
-void equipment::render()
+void equipment::render(HDC hdc)
 {
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		Rectangle(getMemDC(), equipmentWindowRect.left, equipmentWindowRect.top, equipmentWindowRect.right, equipmentWindowRect.bottom);
+		Rectangle(hdc, equipmentWindowRect.left, equipmentWindowRect.top, equipmentWindowRect.right, equipmentWindowRect.bottom);
 		
 	}
 
 	if (equipmentOpen)
 	{
-		equipmentWindowImage->render(getMemDC(), equipmentWindowRect.left, equipmentWindowRect.top);
+		equipmentWindowImage->render(hdc, equipmentWindowRect.left, equipmentWindowRect.top);
 		if (KEYMANAGER->isToggleKey(VK_TAB))
 		{
-			Rectangle(getMemDC(), weaponRect.left, weaponRect.top, weaponRect.right, weaponRect.bottom);
-			Rectangle(getMemDC(), capRect.left, capRect.top, capRect.right, capRect.bottom);
-			Rectangle(getMemDC(), topRect.left, topRect.top, topRect.right, topRect.bottom);
-			Rectangle(getMemDC(), bottomRect.left, bottomRect.top, bottomRect.right, bottomRect.bottom);
-			Rectangle(getMemDC(), glovesRect.left, glovesRect.top, glovesRect.right, glovesRect.bottom);
-			Rectangle(getMemDC(), shoesRect.left, shoesRect.top, shoesRect.right, shoesRect.bottom);
+			Rectangle(hdc, weaponRect.left, weaponRect.top, weaponRect.right, weaponRect.bottom);
+			Rectangle(hdc, capRect.left, capRect.top, capRect.right, capRect.bottom);
+			Rectangle(hdc, topRect.left, topRect.top, topRect.right, topRect.bottom);
+			Rectangle(hdc, bottomRect.left, bottomRect.top, bottomRect.right, bottomRect.bottom);
+			Rectangle(hdc, glovesRect.left, glovesRect.top, glovesRect.right, glovesRect.bottom);
+			Rectangle(hdc, shoesRect.left, shoesRect.top, shoesRect.right, shoesRect.bottom);
 		}
 
 		if (vWeapon.size() > 0)
 		{
-			vWeapon[0].itemImage->render(getMemDC(), weaponRect.left, weaponRect.top);
+			vWeapon[0].itemImage->render(hdc, weaponRect.left, weaponRect.top);
 			if (PtInRect(&weaponRect, m_ptMouse))
 			{
-				vWeapon[0].itemInfoImage->render(getMemDC(), m_ptMouse.x, m_ptMouse.y);
+				vWeapon[0].itemInfoImage->render(hdc, m_ptMouse.x, m_ptMouse.y);
 			}
 		}
 	}

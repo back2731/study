@@ -34,8 +34,8 @@ void SceneShop::update()
 void SceneShop::render()
 {
 	IMAGEMANAGER->render("map", getMemDC());
-	SHOP->render();
-	INVENTORY->render();
-	EQUIPMENT->render();
-	STATUS->render();
+	SHOP->render(getMemDC());
+	INVENTORY->render(getMemDC());
+	EQUIPMENT->render(getMemDC());
+	STATUS->render(getMemDC());
 }

@@ -242,330 +242,330 @@ void shop::update()
 	}
 }
 
-void shop::render()
+void shop::render(HDC hdc)
 {
 	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		Rectangle(getMemDC(), npcRect.left, npcRect.top, npcRect.right, npcRect.bottom);
-		Rectangle(getMemDC(), shopRect.left, shopRect.top, shopRect.right, shopRect.bottom);
-		Rectangle(getMemDC(), shopExitRect.left, shopExitRect.top, shopExitRect.right, shopExitRect.bottom);
-		Rectangle(getMemDC(), buyItemRect.left, buyItemRect.top, buyItemRect.right, buyItemRect.bottom);
-		Rectangle(getMemDC(), sellItemRect.left, sellItemRect.top, sellItemRect.right, sellItemRect.bottom);
-		Rectangle(getMemDC(), buyOffRect1.left, buyOffRect1.top, buyOffRect1.right, buyOffRect1.bottom);
-		Rectangle(getMemDC(), buyOffRect2.left, buyOffRect2.top, buyOffRect2.right, buyOffRect2.bottom);
-		Rectangle(getMemDC(), buyOffRect3.left, buyOffRect3.top, buyOffRect3.right, buyOffRect3.bottom);
-		Rectangle(getMemDC(), buyOffRect4.left, buyOffRect4.top, buyOffRect4.right, buyOffRect4.bottom);
-		Rectangle(getMemDC(), buyOffRect5.left, buyOffRect5.top, buyOffRect5.right, buyOffRect5.bottom);
-		Rectangle(getMemDC(), buyOffRect6.left, buyOffRect6.top, buyOffRect6.right, buyOffRect6.bottom);
-		Rectangle(getMemDC(), buyOffRect7.left, buyOffRect7.top, buyOffRect7.right, buyOffRect7.bottom);
-		Rectangle(getMemDC(), buyOffRect8.left, buyOffRect8.top, buyOffRect8.right, buyOffRect8.bottom);
+		Rectangle(hdc, npcRect.left, npcRect.top, npcRect.right, npcRect.bottom);
+		Rectangle(hdc, shopRect.left, shopRect.top, shopRect.right, shopRect.bottom);
+		Rectangle(hdc, shopExitRect.left, shopExitRect.top, shopExitRect.right, shopExitRect.bottom);
+		Rectangle(hdc, buyItemRect.left, buyItemRect.top, buyItemRect.right, buyItemRect.bottom);
+		Rectangle(hdc, sellItemRect.left, sellItemRect.top, sellItemRect.right, sellItemRect.bottom);
+		Rectangle(hdc, buyOffRect1.left, buyOffRect1.top, buyOffRect1.right, buyOffRect1.bottom);
+		Rectangle(hdc, buyOffRect2.left, buyOffRect2.top, buyOffRect2.right, buyOffRect2.bottom);
+		Rectangle(hdc, buyOffRect3.left, buyOffRect3.top, buyOffRect3.right, buyOffRect3.bottom);
+		Rectangle(hdc, buyOffRect4.left, buyOffRect4.top, buyOffRect4.right, buyOffRect4.bottom);
+		Rectangle(hdc, buyOffRect5.left, buyOffRect5.top, buyOffRect5.right, buyOffRect5.bottom);
+		Rectangle(hdc, buyOffRect6.left, buyOffRect6.top, buyOffRect6.right, buyOffRect6.bottom);
+		Rectangle(hdc, buyOffRect7.left, buyOffRect7.top, buyOffRect7.right, buyOffRect7.bottom);
+		Rectangle(hdc, buyOffRect8.left, buyOffRect8.top, buyOffRect8.right, buyOffRect8.bottom);
 
-		Rectangle(getMemDC(), sellEquipmentSlotOnRect.left, sellEquipmentSlotOnRect.top, sellEquipmentSlotOnRect.right, sellEquipmentSlotOnRect.bottom);
+		Rectangle(hdc, sellEquipmentSlotOnRect.left, sellEquipmentSlotOnRect.top, sellEquipmentSlotOnRect.right, sellEquipmentSlotOnRect.bottom);
 
 		for (int i = 0; i < 8; i++)
 		{
-			Rectangle(getMemDC(), itemSlot[i].left, itemSlot[i].top, itemSlot[i].right, itemSlot[i].bottom);
+			Rectangle(hdc, itemSlot[i].left, itemSlot[i].top, itemSlot[i].right, itemSlot[i].bottom);
 		}
 
 		for (int i = 0; i < 8; i++)
 		{
-			Rectangle(getMemDC(), sellItemSlot[i].left, sellItemSlot[i].top, sellItemSlot[i].right, sellItemSlot[i].bottom);
+			Rectangle(hdc, sellItemSlot[i].left, sellItemSlot[i].top, sellItemSlot[i].right, sellItemSlot[i].bottom);
 		}
 	}
 
-	npcImage->frameRender(getMemDC(), npcRect.left, npcRect.top);
+	npcImage->frameRender(hdc, npcRect.left, npcRect.top);
 	npcRender();
 	
 	if (shopOpen)
 	{
-		shopImage->render(getMemDC(), shopRect.left, shopRect.top);
-		shopExitImage->render(getMemDC(), shopExitRect.left, shopExitRect.top);
-		buyItemImage->render(getMemDC(), buyItemRect.left, buyItemRect.top);
-		sellItemImage->render(getMemDC(), sellItemRect.left, sellItemRect.top);
+		shopImage->render(hdc, shopRect.left, shopRect.top);
+		shopExitImage->render(hdc, shopExitRect.left, shopExitRect.top);
+		buyItemImage->render(hdc, buyItemRect.left, buyItemRect.top);
+		sellItemImage->render(hdc, sellItemRect.left, sellItemRect.top);
 
 		if (buyNotChoice)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if(buyItem1)
 		{
-			buyOnImage1->render(getMemDC(), buyOnRect1.left, buyOnRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOnImage1->render(hdc, buyOnRect1.left, buyOnRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem2)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOnImage2->render(getMemDC(), buyOnRect2.left, buyOnRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOnImage2->render(hdc, buyOnRect2.left, buyOnRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem3)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOnImage3->render(getMemDC(), buyOnRect3.left, buyOnRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOnImage3->render(hdc, buyOnRect3.left, buyOnRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem4)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOnImage4->render(getMemDC(), buyOnRect4.left, buyOnRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOnImage4->render(hdc, buyOnRect4.left, buyOnRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem5)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOnImage5->render(getMemDC(), buyOnRect5.left, buyOnRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOnImage5->render(hdc, buyOnRect5.left, buyOnRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem6)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOnImage6->render(getMemDC(), buyOnRect6.left, buyOnRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOnImage6->render(hdc, buyOnRect6.left, buyOnRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem7)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOnImage7->render(getMemDC(), buyOnRect7.left, buyOnRect7.top);
-			buyOffImage8->render(getMemDC(), buyOffRect8.left, buyOffRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOnImage7->render(hdc, buyOnRect7.left, buyOnRect7.top);
+			buyOffImage8->render(hdc, buyOffRect8.left, buyOffRect8.top);
 		}
 		else if (buyItem8)
 		{
-			buyOffImage1->render(getMemDC(), buyOffRect1.left, buyOffRect1.top);
-			buyOffImage2->render(getMemDC(), buyOffRect2.left, buyOffRect2.top);
-			buyOffImage3->render(getMemDC(), buyOffRect3.left, buyOffRect3.top);
-			buyOffImage4->render(getMemDC(), buyOffRect4.left, buyOffRect4.top);
-			buyOffImage5->render(getMemDC(), buyOffRect5.left, buyOffRect5.top);
-			buyOffImage6->render(getMemDC(), buyOffRect6.left, buyOffRect6.top);
-			buyOffImage7->render(getMemDC(), buyOffRect7.left, buyOffRect7.top);
-			buyOnImage8->render(getMemDC(), buyOnRect8.left, buyOnRect8.top);
+			buyOffImage1->render(hdc, buyOffRect1.left, buyOffRect1.top);
+			buyOffImage2->render(hdc, buyOffRect2.left, buyOffRect2.top);
+			buyOffImage3->render(hdc, buyOffRect3.left, buyOffRect3.top);
+			buyOffImage4->render(hdc, buyOffRect4.left, buyOffRect4.top);
+			buyOffImage5->render(hdc, buyOffRect5.left, buyOffRect5.top);
+			buyOffImage6->render(hdc, buyOffRect6.left, buyOffRect6.top);
+			buyOffImage7->render(hdc, buyOffRect7.left, buyOffRect7.top);
+			buyOnImage8->render(hdc, buyOnRect8.left, buyOnRect8.top);
 		}
 
 		if (selectEquip)
 		{
-			equipmentSlotOnImage->render(getMemDC(), equipmentSlotOnRect.left, equipmentSlotOnRect.top);
-			consumptionSlotOffImage->render(getMemDC(), consumptionSlotOffRect.left, consumptionSlotOffRect.top);
+			equipmentSlotOnImage->render(hdc, equipmentSlotOnRect.left, equipmentSlotOnRect.top);
+			consumptionSlotOffImage->render(hdc, consumptionSlotOffRect.left, consumptionSlotOffRect.top);
 
 			for (int i = 0; i < vEquip.size(); i++)
 			{
-				vEquip[i].itemImage->render(getMemDC(), itemSlot[i].left, itemSlot[i].top);
+				vEquip[i].itemImage->render(hdc, itemSlot[i].left, itemSlot[i].top);
 			}
 			for (int i = 0; i < vEquip.size(); i++)
 			{
 				sprintf_s(str, "%s", vEquip[i].name);
-				TextOut(getMemDC(), 310, 260 + i * 45, str, strlen(str));
+				TextOut(hdc, 310, 260 + i * 45, str, strlen(str));
 				sprintf_s(str, "%d 五社", vEquip[i].price);
-				TextOut(getMemDC(), 310, 280 + i * 45, str, strlen(str));
+				TextOut(hdc, 310, 280 + i * 45, str, strlen(str));
 			}
 		}
 		else if (selectConsumption)
 		{
-			consumptionSlotOnImage->render(getMemDC(), consumptionSlotOnRect.left, consumptionSlotOnRect.top);
-			equipmentSlotOffImage->render(getMemDC(), equipmentSlotOffRect.left, equipmentSlotOffRect.top);
+			consumptionSlotOnImage->render(hdc, consumptionSlotOnRect.left, consumptionSlotOnRect.top);
+			equipmentSlotOffImage->render(hdc, equipmentSlotOffRect.left, equipmentSlotOffRect.top);
 
 			for (int i = 0; i < vPotion.size(); i++)
 			{
-				vPotion[i].itemImage->render(getMemDC(), itemSlot[i].left, itemSlot[i].top);
+				vPotion[i].itemImage->render(hdc, itemSlot[i].left, itemSlot[i].top);
 			}
 			for (int i = 0; i < vPotion.size(); i++)
 			{
 				sprintf_s(str, "%s", vPotion[i].name);
-				TextOut(getMemDC(), 310, 260 + i * 45, str, strlen(str));
+				TextOut(hdc, 310, 260 + i * 45, str, strlen(str));
 				sprintf_s(str, "%d 五社", vPotion[i].price);
-				TextOut(getMemDC(), 310, 280 + i * 45, str, strlen(str));
+				TextOut(hdc, 310, 280 + i * 45, str, strlen(str));
 			}
 		}
 
 		if (sellNotChoice)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem1)
 		{
-			sellOnImage1->render(getMemDC(), sellOnRect1.left, sellOnRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOnImage1->render(hdc, sellOnRect1.left, sellOnRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem2)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOnImage2->render(getMemDC(), sellOnRect2.left, sellOnRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOnImage2->render(hdc, sellOnRect2.left, sellOnRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem3)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOnImage3->render(getMemDC(), sellOnRect3.left, sellOnRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOnImage3->render(hdc, sellOnRect3.left, sellOnRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem4)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOnImage4->render(getMemDC(), sellOnRect4.left, sellOnRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOnImage4->render(hdc, sellOnRect4.left, sellOnRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem5)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOnImage5->render(getMemDC(), sellOnRect5.left, sellOnRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOnImage5->render(hdc, sellOnRect5.left, sellOnRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem6)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOnImage6->render(getMemDC(), sellOnRect6.left, sellOnRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOnImage6->render(hdc, sellOnRect6.left, sellOnRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem7)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOnImage7->render(getMemDC(), sellOnRect7.left, sellOnRect7.top);
-			sellOffImage8->render(getMemDC(), sellOffRect8.left, sellOffRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOnImage7->render(hdc, sellOnRect7.left, sellOnRect7.top);
+			sellOffImage8->render(hdc, sellOffRect8.left, sellOffRect8.top);
 		}
 		else if (sellItem8)
 		{
-			sellOffImage1->render(getMemDC(), sellOffRect1.left, sellOffRect1.top);
-			sellOffImage2->render(getMemDC(), sellOffRect2.left, sellOffRect2.top);
-			sellOffImage3->render(getMemDC(), sellOffRect3.left, sellOffRect3.top);
-			sellOffImage4->render(getMemDC(), sellOffRect4.left, sellOffRect4.top);
-			sellOffImage5->render(getMemDC(), sellOffRect5.left, sellOffRect5.top);
-			sellOffImage6->render(getMemDC(), sellOffRect6.left, sellOffRect6.top);
-			sellOffImage7->render(getMemDC(), sellOffRect7.left, sellOffRect7.top);
-			sellOnImage8->render(getMemDC(), sellOnRect8.left, sellOnRect8.top);
+			sellOffImage1->render(hdc, sellOffRect1.left, sellOffRect1.top);
+			sellOffImage2->render(hdc, sellOffRect2.left, sellOffRect2.top);
+			sellOffImage3->render(hdc, sellOffRect3.left, sellOffRect3.top);
+			sellOffImage4->render(hdc, sellOffRect4.left, sellOffRect4.top);
+			sellOffImage5->render(hdc, sellOffRect5.left, sellOffRect5.top);
+			sellOffImage6->render(hdc, sellOffRect6.left, sellOffRect6.top);
+			sellOffImage7->render(hdc, sellOffRect7.left, sellOffRect7.top);
+			sellOnImage8->render(hdc, sellOnRect8.left, sellOnRect8.top);
 		}
 
 		if (sellSelectEquip)
 		{
-			sellEquipmentSlotOnImage->render(getMemDC(), sellEquipmentSlotOnRect.left, sellEquipmentSlotOnRect.top);
-			sellConsumptionSlotOffImage->render(getMemDC(), sellConsumptionSlotOffRect.left, sellConsumptionSlotOffRect.top);
+			sellEquipmentSlotOnImage->render(hdc, sellEquipmentSlotOnRect.left, sellEquipmentSlotOnRect.top);
+			sellConsumptionSlotOffImage->render(hdc, sellConsumptionSlotOffRect.left, sellConsumptionSlotOffRect.top);
 			
 			for (int i = 0; i < INVENTORY->getEquipVector().size(); i++)
 			{
-				INVENTORY->getEquipVector()[i].itemImage->render(getMemDC(), sellItemSlot[i].left, sellItemSlot[i].top);
+				INVENTORY->getEquipVector()[i].itemImage->render(hdc, sellItemSlot[i].left, sellItemSlot[i].top);
 				if (i > 6) break;
 			}
 			for (int i = 0; i < INVENTORY->getEquipVector().size(); i++)
 			{
 				sprintf_s(str, "%s", INVENTORY->getEquipVector()[i].name);
-				TextOut(getMemDC(), 580, 260 + i * 45, str, strlen(str));
+				TextOut(hdc, 580, 260 + i * 45, str, strlen(str));
 				sprintf_s(str, "%d 五社", INVENTORY->getEquipVector()[i].price / 2);
-				TextOut(getMemDC(), 580, 280 + i * 45, str, strlen(str));
+				TextOut(hdc, 580, 280 + i * 45, str, strlen(str));
 				if (i > 6) break;
 			}
 		}
 		else if (sellSelectConsumption)
 		{
-			sellConsumptionSlotOnImage->render(getMemDC(), sellConsumptionSlotOnRect.left, sellConsumptionSlotOnRect.top);
-			sellEquipmentSlotOffImage->render(getMemDC(), sellEquipmentSlotOffRect.left, sellEquipmentSlotOffRect.top);
+			sellConsumptionSlotOnImage->render(hdc, sellConsumptionSlotOnRect.left, sellConsumptionSlotOnRect.top);
+			sellEquipmentSlotOffImage->render(hdc, sellEquipmentSlotOffRect.left, sellEquipmentSlotOffRect.top);
 
 			for (int i = 0; i < INVENTORY->getPotionVector().size(); i++)
 			{
-				INVENTORY->getPotionVector()[i].itemImage->render(getMemDC(), sellItemSlot[i].left, sellItemSlot[i].top);
+				INVENTORY->getPotionVector()[i].itemImage->render(hdc, sellItemSlot[i].left, sellItemSlot[i].top);
 				if (i > 6) break;
 			}
 			for (int i = 0; i < INVENTORY->getPotionVector().size(); i++)
 			{
 				sprintf_s(str, "%s", INVENTORY->getPotionVector()[i].name);
-				TextOut(getMemDC(), 580, 260 + i * 45, str, strlen(str));
+				TextOut(hdc, 580, 260 + i * 45, str, strlen(str));
 				sprintf_s(str, "%d 五社", INVENTORY->getPotionVector()[i].price / 2);
-				TextOut(getMemDC(), 580, 280 + i * 45, str, strlen(str));
+				TextOut(hdc, 580, 280 + i * 45, str, strlen(str));
 				if (i > 6) break;
 			}
 		}
 	}
 
 	sprintf_s(str, "x :  %d", m_ptMouse.x);
-	TextOut(getMemDC(), 400, 100, str, strlen(str));
+	TextOut(hdc, 400, 100, str, strlen(str));
 
 	sprintf_s(str, "y :  %d", m_ptMouse.y);
-	TextOut(getMemDC(), 400, 120, str, strlen(str));
+	TextOut(hdc, 400, 120, str, strlen(str));
 
 	sprintf_s(str, "buyItem1 :  %d", buyItem1);
-	TextOut(getMemDC(), 600, 100, str, strlen(str));
+	TextOut(hdc, 600, 100, str, strlen(str));
 }
 
 void shop::npcRender()
